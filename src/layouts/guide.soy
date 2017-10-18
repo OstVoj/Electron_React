@@ -1,0 +1,94 @@
+{namespace guide}
+
+/**
+ * @param site
+ */
+{template .render}
+	<div class="main guide">
+		<main class="content">
+			<div class="docs">
+				{call .topbar data="all" /}
+
+				{call Sidebar.render}
+					{param page: $site.index.children['docs'] /}
+				{/call}
+
+				<div class="sidebar-offset">
+					{call .guide data="all" /}
+				</div>
+			</div>
+		</main>
+	</div>
+{/template}
+
+/**
+ * @param page
+ * @param content
+ */
+{template .guide}
+	<header>
+		<div class="container-hybrid">
+			<h1 class="title">{$page.headerTitle} Guide</h1>
+		</div>
+	</header>
+
+	<div class="container-hybrid">
+		<div class="docs-guide row">
+			<div class="docs-content col-xs-16 col-md-10 col-lg-offset-1 col-lg-9">
+				<div class="guide-content">
+					{$content}
+				</div>
+				{call Feedback.render data="all" /}
+			</div>
+
+			<nav class="col-xs-16 col-md-offset-1 col-md-5 col-lg-4">
+				<div class="docs-nav-container">
+					{call ElectricReadingProgress.render}
+						{param elementClasses: 'docs-nav topbar-is-fixed' /}
+						{param offsetTop: 300 /}
+						{param offsetBottom: 200 /}
+					{/call}
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	{call Newsletter.render /}
+
+{/template}
+
+/**
+ */
+{template .topbar}
+	<nav class="topbar topbar-docs topbar-light topbar-large">
+		{call .logo data="all" /}
+		{call .menu data="all" /}
+	</nav>
+{/template}
+
+/**
+ *
+ */
+{template .logo}
+	<div class="topbar-logo">
+		<a class="topbar-logo-link" href="/">
+			<span class="wedeploy-logo">
+				<img src="../assets/logo-horizontal.svg" class="logo_img"/>
+				<span class="liferay">by Liferay</span>
+				<span class="version-container">
+					<span class="arrow-up"></span>
+					<span class="version">beta</span>
+				</span>
+			</span>
+		</a>
+	</div>
+{/template}
+
+/**
+ * @param site
+ */
+{template .menu}
+	{call Topbar.render}
+		{param section: $site.index /}
+	{/call}
+{/template}

@@ -1,0 +1,45 @@
+.topbar .wedeploy-logo .version-container {
+	left: -9px;
+}
+
+.topbar.topbar-large .wedeploy-logo .version-container {
+	left: -3px;
+}
+
+.topbar.topbar-large.topbar-light .active .topbar-link,
+.topbar.topbar-large.topbar-light .active .topbar-link:hover,
+.topbar.topbar-large.topbar-light .active .topbar-link:focus {
+	color: $accent;
+	border-bottom: 0px solid $accent;
+}
+
+.guide .docs .sidebar-list.sidebar-list-1 .sidebar-link.sidebar-link-selected {
+	background: none;
+}
+
+.guide .docs .sidebar-list.sidebar-list-1 .sidebar-item.active > .sidebar-list.sidebar-list-1 .sidebar-item.active .sidebar-link.sidebar-link-selected {
+	background: rgba($accent, 0.1);
+}
+
+.topbar .topbar-list .topbar-item:last-child {
+	display: none;
+	@media (min-width: 960px) {
+		display: inline-block;
+	}
+}
+
+.get-started {
+	border-radius: 60px;
+	margin-top: -6px;
+}
+
+.topbar .topbar-list .topbar-item {
+	margin-top: -6px;
+}
+
+.docs .topbar .topbar-list .topbar-item:last-child {
+	display: none;
+	@media (min-width: 1100px) {
+		display: inline-block;
+	}
+}

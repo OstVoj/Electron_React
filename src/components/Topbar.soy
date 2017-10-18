@@ -1,0 +1,32 @@
+{namespace Topbar}
+
+/**
+ * @param section
+ */
+{template .render}
+	{call ElectricNavigation.render}
+		{param depth: 1 /}
+		{param elementClasses: 'topbar-list' /}
+		{param linkClasses: 'topbar-link' /}
+		{param listItemClasses: 'topbar-item' /}
+		{param anchorVariant: 'topbar' /}
+		{param section: $section /}
+	{/call}
+{/template}
+
+/**
+ * @param page
+ */
+{deltemplate ElectricNavigation.anchor variant="'topbar'"}
+	{if $page.url == '//console.wedeploy.com/signup'}
+		<a class="btn btn-accent btn-sm get-started" href="{$page.url}">
+	{elseif $page.url == '//console.wedeploy.com/login'}
+		<a class="topbar-link login" href="{$page.url}">
+	{elseif $page.url == '//chat.wedeploy.com/'}
+		<a class="topbar-link" target="_blank" href="{$page.url}">
+	{else}
+		<a class="topbar-link{$page.active ? ' active' : ''}" href="{$page.redirect ?: $page.url}">
+	{/if}
+		{$page.title}
+	</a>
+{/deltemplate}

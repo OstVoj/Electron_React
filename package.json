@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "wedeploy.com",
+  "version": "2.0.0",
+  "dependencies": {
+    "moment": "2.0.0",
+    "node-sass": "^4.5.3"
+  },
+  "files": [
+    "bin",
+    "binding.gyp",
+    "lib",
+    "scripts",
+    "src",
+    "vendor"
+  ],
+  "devDependencies": {
+    "electric-marble-components": "^2.0.1",
+    "marble": "^2.11.8",
+    "metal-toast": "^2.0.0",
+    "metal-toggler": "^2.0.0"
+  }
+}

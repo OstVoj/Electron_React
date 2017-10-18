@@ -1,0 +1,77 @@
+---
+title: "Pricing"
+description: "Everything you need to know to get started."
+weight: 2
+---
+
+{namespace pageDocsIndex}
+
+/**
+ *
+ */
+{template .render}
+	{call docs.render data="all"}
+		{param content kind="html"}
+			{call .topics data="all" /}
+		{/param}
+	{/call}
+{/template}
+
+/**
+ * @param page
+ */
+{template .topics}
+	<div class="container-hybrid docs-home-top">
+		<div class="row">
+			<div class="col-xs-14 col-xs-offset-1 col-md-16 col-md-offset-0">
+				<h1 class="docs-home-top-title">WeDeploy Docs Center</h1>
+				<p class="docs-home-top-description">Start learning how to leverage the power of WeDeploy in your project.</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="container-hybrid">
+				<div class="row">
+					<div class="col-xs-14 col-xs-offset-1 col-md-10 col-md-offset-3 col-lg-6 col-lg-offset-5">
+						<div class="search">
+							{call ElectricSearchAutocomplete.render}
+								{param maxResults: 3 /}
+								{param path: '/docs/' /}
+								{param placeholder: 'Enter a search term here' /}
+							{/call}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="docs-home-topics">
+		<div class="container-hybrid">
+			<div class="row">
+				<div class="col-xs-14 col-xs-offset-1 ">
+					<section class="docs-home-middle">
+						<h2 class="docs-home-middle-subtitle">Choose a Guide</h2>
+						<p class="docs-home-middle-description">Each one provides step by step coverage for every core feature.</p>
+					</section>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 col-md-offset-2 col-xs-16">
+					<div class="row">
+						{foreach $childId in $page.childIds}
+							{if not $page.children[$childId].hidden}
+								<div class="col-md-8 col-md-offset-0 col-xs-14 col-xs-offset-1">
+									<a class="topic radial-out" href="{$page.children[$childId].url}">
+										<div class="topic-icon">
+											<span class="icon-16-{$page.children[$childId].icon}"></span>
+										</div>
+										<h3 class="topic-title">{$page.children[$childId].title}</h3>
+									</a>
+								</div>
+							{/if}
+						{/foreach}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{/template}

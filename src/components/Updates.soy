@@ -1,0 +1,60 @@
+{namespace Updates}
+
+/**
+ * @param updates
+ */
+{template .render}
+	<div class="updates">
+		<div class="container">
+			{call .updates data="all" /}
+		</div>
+	</div>
+{/template}
+
+/**
+ * @param updates
+ */
+{template .updates}
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-3 col-md-16 col-md-offset-0">
+			{if $updates}
+				{foreach $update in $updates}
+					<section class="update">
+						<div class="row update-row">
+							<div class="col-sm-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-0 minor-update update-timeline">
+								<div class="update-point">{$update.date}</div>
+							</div>
+
+							<div class="col-sm-12 col-md-11 col-lg-14 update-features">
+								{call .features data="all"}
+									{param update: $update /}
+								{/call}
+							</div>
+						</div>
+					</section>
+				{/foreach}
+			{/if}
+		</div>
+	</div>
+{/template}
+
+/**
+ * @param update
+ */
+{template .features}
+	<div class="row">
+		<div class="col-xs-16 col-sm-16 update-feature">
+			<div class="feature-topper">
+				{if $update.icon}
+					<span class="feature-icon icon-16-{$update.icon}"></span>
+				{/if}
+
+				<h1 class="feature-header">Version <span>{$update.version}</span></h1>
+			</div>
+
+			<div class="feature-content">
+				<p class="feature-lead">{$update.description}</p>
+			</div>
+		</div>
+	</div>
+{/template}

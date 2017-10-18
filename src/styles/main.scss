@@ -1,0 +1,83 @@
+$accent: #6E0CE4;
+
+@import "marble";
+
+// Root
+@import "templates/root";
+
+// Landing
+@import "templates/landing";
+
+// Docs
+@import "templates/docs";
+
+// Search
+@import "templates/search";
+
+// Updates
+@import "templates/updates";
+@import "updates";
+
+// Blog
+@import "templates/blog";
+
+// Tutorial
+@import "templates/tutorial";
+
+// _Home
+@import "home";
+
+// _Docs
+@import "docs";
+
+// _Terms
+@import "terms";
+
+// _Topbar
+@import "topbar";
+
+// _Tutorials
+@import "tutorials";
+
+//ovewrite blog h1 from marble
+.blog .container header h1 {
+	@include h3;
+}
+
+//overwrite tooltip layout from marble
+.tooltip.bottom .tooltip-inner {
+	background: $primary;
+	color: white;
+	font-family: $font-secondary;
+	font-size: 10px;
+	font-weight: 400;
+	padding: 0 12px;
+	line-height: 36px;
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 5px;
+		left: 0;
+		width: 100%;
+		height: calc(100% - 10px); // parent padding 5px 0
+		border-radius: 4px;
+		background: rgba($white, 0.1);
+		z-index: 1;
+	}
+}
+
+::-moz-selection {
+	background: $accent;
+	color: white;
+}
+
+::selection {
+	background: $accent;
+	color: white;
+}
+
+.cm-s-dracula span.cm-tag {
+	color: #50fa7b;
+}
+

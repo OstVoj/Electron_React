@@ -1,0 +1,60 @@
+{namespace docs}
+
+/**
+ * @param content
+ * @param page
+ */
+{template .render}
+	<div class="main">
+		<main class="content guide">
+			<div class="docs">
+				{call .topbar data="all" /}
+
+				{call Sidebar.render}
+					{param page: $page /}
+				{/call}
+
+				<div class="sidebar-offset">
+					{$content}
+					{call Newsletter.render /}
+				</div>
+			</div>
+		</main>
+	</div>
+{/template}
+
+/**
+ */
+{template .topbar}
+	<nav class="topbar topbar-docs topbar-light topbar-large">
+		{call .logo data="all" /}
+		{call .menu data="all" /}
+	</nav>
+{/template}
+
+/**
+ *
+ */
+{template .logo}
+	<div class="topbar-logo">
+		<a class="topbar-logo-link" href="/">
+			<span class="wedeploy-logo">
+				<img src="../assets/logo-horizontal.svg" class="logo_img"/>
+				<span class="liferay">by Liferay</span>
+				<span class="version-container">
+					<span class="arrow-up"></span>
+					<span class="version">beta</span>
+				</span>
+			</span>
+		</a>
+	</div>
+{/template}
+
+/**
+ * @param site
+ */
+{template .menu}
+	{call Topbar.render}
+		{param section: $site.index /}
+	{/call}
+{/template}

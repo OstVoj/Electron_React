@@ -1,0 +1,154 @@
+html, body {
+	width: 100%;
+	max-width: 100%;
+	min-height: 100vh;
+	max-width: 100%;
+	min-width: 100%;
+	-webkit-overflow-scrolling: touch;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	padding: 0;
+	margin: 0;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+a:focus,
+button:focus {
+	outline: none;
+}
+
+.container-wedeploy {
+	@include container-fixed;
+
+	@media (min-width: $screen-sm-min) {
+		width: 100%;
+	}
+
+	@media (min-width: $screen-md-min) {
+		width: 100%;
+	}
+
+	@media (min-width: 320px) {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	@media (min-width: 600px) {
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+
+	@media (min-width: 1440px) {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	@media (min-width: 1920px) {
+		width: 1920px;
+		margin: 0 auto;
+	}
+}
+
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0px 1000px #e6e7e8 inset !important;
+	color: rgba(14, 20, 26, 0.9) !important;
+}
+
+.form-control::-webkit-input-placeholder {
+	color: rgba($primary, 0.4);
+}
+
+.form-control:-moz-placeholder { /* Firefox 18- */
+	color: rgba($primary, 0.4);
+}
+
+.form-control::-moz-placeholder {  /* Firefox 19+ */
+	color: rgba($primary, 0.4);
+}
+
+.form-control:-ms-input-placeholder {
+	color: rgba($primary, 0.4);
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.no-padding-right {
+	padding-right: 0;
+}
+
+.btn-sm {
+	padding: 0 19px;
+	line-height: 48px;
+	font-family: $font-primary;
+	font-weight: 700;
+	font-size: 15px;
+}
+
+.flex-left-center {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.flex-right-center {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.flex-left-top {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.flex-column-left-top {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.flex-left-spacebetween {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.flex-center-center {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex-center-top {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+#senna-body-default,
+.flipped {
+	height: 100%;
+}

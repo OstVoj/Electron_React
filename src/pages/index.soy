@@ -1,0 +1,272 @@
+---
+description: "Jenkins Hosting with Essential Configurations."
+---
+
+{namespace pageIndex}
+
+/**
+ *
+ */
+{template .render}
+	{call landing.render data="all"}
+		{param content kind="html"}
+			{call .view_1 data="all" /}
+			{call .view_3_1 data="all" /}
+			{call .view_3_2 data="all" /}
+			{call .view_4 data="all" /}
+			{call .view_6 data="all" /}
+		{/param}
+	{/call}
+{/template}
+
+/**
+ *
+ */
+{template .view_1}
+	<div id="view-1">
+		<div class="container-wedeploy">
+			<div id="view-1__container">
+				{call .subscribe data="all" /}
+				{call .terminal data="all" /}
+			</div>
+		</div>
+	</div>
+{/template}
+
+/**
+ *
+ */
+{template .view_3_1}
+	// <div id="view-3__1">
+	// 	<div class="container-wedeploy">
+	// 		<div class="info-box">
+	// 			<div class="info-box__container">
+	// 				<p class="top-title">Microservices</p>
+	// 				<h3>Built-in APIs that can help you create modern apps faster.</h3>
+	// 				<p>We provide a set of ready-to-use services that enables you to store data in the cloud, search and stream content in real time, authenticate users, send emails to your users and so much more.</p>
+	// 			</div>
+	// 		</div>
+	// 		<div class="bg-text">
+	// 			<div class="bg-text__solid"></div>
+	// 			<div class="bg-text__gradient"></div>
+	// 		</div>
+	// 		<div class="info-img"></div>
+	// 	</div>
+	// </div>
+{/template}
+
+/**
+ *
+ */
+{template .view_3_2}
+	// <div id="view-3__2">
+	// 	<div class="container-wedeploy">
+	// 		<div class="info-box">
+	// 			<div class="info-box__container flex-center-top">
+	// 				<p class="top-title">Services</p>
+	// 				<h3>Your favorite stack in the cloud in just a few clicks.</h3>
+	// 				<p>Choose between dozens of languages, frameworks or entire application stacks. Launch production-ready environments in a matter of minutes.</p>
+	// 			</div>
+	// 		</div>
+	// 		<div class="bg-text">
+	// 			<div class="bg-text__solid"></div>
+	// 			<div class="bg-text__gradient"></div>
+	// 		</div>
+	// 		<div class="info-img"></div>
+	// 	</div>
+	// </div>
+{/template}
+
+/**
+ *
+ */
+{template .view_4}
+
+<div id="view-4">
+	<div class="container-wedeploy">
+		<div id="view-4__giant" class="giant">
+		</div>
+		<div class="text-center">
+			<h2>Carefully Designed Features</h2>
+		</div>
+		<div class="text-center">
+			<h4>Empower You to Build Amazing Apps</h4>
+			<input type="button" value="DISCOVER WHY" onclick="window.location.href='/blog/'"/>
+		</div>
+		
+
+		
+			<div class="o-block-grid c-logowall v--three v--gapless">
+				<figure class="c-logowall__item">
+					<img src="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/airbnb_horizontal_lockup.png" srcset="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/airbnb_horizontal_lockup.png 1x, https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/airbnb_horizontal_lockup@2x.png 2x" width="150" alt="Airbnb logo">
+				</figure>
+				<figure class="c-logowall__item">
+					<img src="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/Capital-One-logo.png" srcset="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/Capital-One-logo.png 1x, https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/Capital-One-logo@2x.png 2x" width="150" alt="CapitalOne logo">
+				</figure>
+				<figure class="c-logowall__item">
+					<img src="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/harvard-black.png" srcset="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/harvard-black.png 1x, https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/harvard-black@2x.png 2x" width="160" alt="Harvard logo">
+				</figure>
+				<figure class="c-logowall__item">
+					<img src="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/ibmpos.png" srcset="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/ibmpos.png 1x, https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/ibmpos@2x.png 2x" width="120" alt="IBM logo">
+				</figure>
+				<figure class="c-logowall__item">
+					<img src="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/oracle_logo.png" srcset="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/oracle_logo.png 1x, https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/oracle_logo@2x.png 2x" width="170" alt="Oracle logo">
+				</figure>
+				<figure class="c-logowall__item">
+					<img src="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/ticketmaster.png" srcset="https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/ticketmaster.png 1x, https://a.slack-edge.com/5ced7/marketing/img/logos/company/home/ticketmaster@2x.png 2x" width="170" alt="Ticketmaster logo">
+				</figure>
+			</div>
+		</div>
+
+	
+</div>
+
+{/template}
+
+/**
+ *
+ */
+{template .view_6}
+<div id="view-6" class="text-center">
+	<div class="info">
+		<div class="info__button">
+			<a href="https://docs.google.com" class="btn btn-accent btn-block">Get Started with $25 FREE Credits</a>
+		</div>
+		<div class="info__question">
+			<h5>Have a question?<a href="tel:+1 (909) 378-5432" class="phone"> Schedule a call with our sales team</a></h5>
+		</div>
+
+	</div>
+</div>
+{/template}
+
+/**
+ * @param icon
+ * @param hasWeIcon
+ * @param title
+ * @param description
+ */
+{template .feature}
+	<li class="feature">
+		<div class="feature__box text-center">
+			<div class="box__badge-container">
+				<div id="badge-data" class="badge flex-center-center">
+					<img src="/images/home/icons_view_2/{$icon}" />
+				</div>
+				{if $hasWeIcon}
+					<div class="we-container">
+						<div class="we flex-center-center">
+							<span>We</span>
+						</div>
+					</div>
+				{/if}
+			</div>
+			<div class="feature__title">
+				<h3>{$title}</h3>
+			</div>
+			<div class="feature__description">
+				<p>{$description}</p>
+			</div>
+		</div>
+	</li>
+{/template}
+
+/**
+ * @param page
+ */
+{template .subscribe}
+	<div id="subscribe" class="col-xs-16 col-sm-16 col-md-16 col-lg-4 col-lg-offset-1">
+		<div id="subscribe__container">
+			<h1>Deploy Jenkins.</h1><h1>Within Minutes.</h1>
+
+			<p>{$page.description}</p>
+
+			<a href="https://docs.google.com" id="subscribe__submit-small" class="open-modal btn btn-accent btn-block">
+				<span>Get Started – It’s FREE</span>
+			</a>
+
+			<div id="terminal-img"></div>
+
+			<form id="view-1__form" class="form-signup">
+				<a href="https://docs.google.com" type="submit" class="btn btn-accent btn-block">
+					<span>Get Started – It’s FREE</span>
+				</a>
+			</form>
+
+		</div>
+
+	</div>
+{/template}
+
+/**
+ *
+ */
+{template .terminal}
+	<div id="terminal" class="col-xs-16 col-sm-16 col-md-9 col-lg-9 col-lg-offset-1">
+
+		<div class="terminal__content">
+
+			<div class="content__wrapper">
+
+				{call .browser /}
+
+				{call .cli /}
+
+			</div>
+		</div>
+	</div>
+{/template}
+
+/**
+ *
+ */
+{template .browser}
+
+	<div id="browser">		
+		<img src="/images/home/terminal/console-overview.png" />
+	</div>
+{/template}
+
+/**
+ * @param first
+ * @param projectName
+ * @param services
+ * @param activityIcon
+ * @param activityTimeElapsed
+ */
+{template .browser_project}
+
+	<div class="no-padding col--browser span_6 browser__project-item{$first ? 'first' : ''}">
+		<div class="project-item__content flex-left-center">
+			<div class="project-item__info">
+				<p class="large">{$projectName}</p>
+			</div>
+			<div class="project-item__status flex-column-left-center">
+				
+			</div>
+			<div class="project-item__services flex-column-left-center">
+				{$services}
+			</div>
+			<div class="project-item__activity flex-column-left-center">
+				<span class="box box-icon flex-center-center">
+					{$activityIcon}
+				</span>
+				<span class="time-small">{$activityTimeElapsed}</span>
+			</div>
+			<div class="project-item__settings flex-column-left-center">
+				<span class="flex-right-center">
+					<span class="icon-12-ellipsis"></span>
+				</span>
+			</div>
+		</div>
+	</div>
+{/template}
+
+/**
+ *
+ */
+{template .cli}
+	<div id="cli" class="no-padding col--terminal span_3">
+		
+	</div>
+{/template}

@@ -1,0 +1,58 @@
+.update-point {
+	font-family: $font-primary;
+}
+
+.feature-header {
+	font-family: $font-primary;
+
+	span {
+		color: $accent;
+	}
+}
+
+.update-feature {
+	margin-bottom: 0;
+}
+
+.update-feature .feature-header {
+	padding-left: 0;
+	font-weight: 600;
+}
+
+.update-feature .feature-lead {
+	font-family: $font-secondary;
+}
+
+.update .read-more a {
+	font-family: $font-secondary;
+}
+
+.minor-update .update-point {
+	text-indent: 0em;
+}
+
+@media screen and (min-width: 600px) {
+	.minor-update .update-point {
+		text-indent: -6em;
+		padding-top: 15px;
+	}
+}
+
+@media screen and (min-width: 960px) {
+	.minor-update .update-point {
+		text-indent: -8em;
+		padding-top: 6px;
+	}
+}
+
+@media screen and (max-width: 960px) {
+	.minor-update .update-point {
+		text-decoration: none;
+	}
+}
+
+@media screen and (min-width: 1280px) {
+	.minor-update .update-point {
+		text-indent: -9.5em;
+	}
+}
