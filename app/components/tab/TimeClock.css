@@ -1,0 +1,41 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.left {
+  width: 40%;
+}
+.overviewContainer {
+  width: 100%;
+  height: 200px;
+  padding: 20px 20px !important;
+}
+.overViewDetail {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.cameraSelect {
+  margin-top: 20px;
+  color: black;
+  width: 100%;
+}
+.buttonStartContainer {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.right {
+  width: calc(60% - 10px);
+  margin-left: 10px;
+}
+.timeClockDescription {
+  width: 100%;
+  text-transform: uppercase;
+}
+.cameraPreviewFieldSet {
+  margin-top: 20px;
+}

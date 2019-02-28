@@ -1,61 +1,25 @@
-# [wedeploy.com](http://wedeploy.com) [![Built with Electric](https://img.shields.io/badge/built%20with-electric-f3c302.svg?style=flat)](http://electricjs.com)
+## Install
 
-> Contains the [wedeploy.com](http://wedeploy.com) static pages like homepage, docs, blog, etc.
+Install the dependencies with yarn.
 
-## Setup
-
-1. Make sure you have [node and npm](https://nodejs.org/en/download/) installed:
-
-```sh
-node -v && npm -v
+```bash
+$ yarn
 ```
 
-2. Install our global dependencies:
+## Starting Development
 
-```sh
-[sudo] npm i -g electric-cli
+Start the app in the `dev` environment. This starts the renderer process in [**hot-module-replacement**](https://webpack.js.org/guides/hmr-react/) mode and starts a webpack dev server that sends hot updates to the renderer process:
+
+```bash
+$ yarn dev
 ```
 
-3. Install our local dependencies:
+## Packaging for Production
 
-```sh
-npm i
+To package apps for the local platform:
+
+```bash
+$ yarn package
 ```
 
-## Usage
-
-### run
-
-* Runs the `build`, `server`, and `watch` commands for quick development.
-
-```
-electric run
-```
-
-### build
-
-* Builds the site and places file in dist directory.
-
-```
-electric build
-```
-
-### server
-
-* Starts up a local development server.
-
-```
-electric server
-```
-
-### watch
-
-* Watches for changes and triggers build.
-
-```
-electric watch
-```
-
-## License
-
-[BSD License](https://github.com/wedeploy/wedeploy.com/blob/master/LICENSE.md) © Liferay, Inc.
+## Docs

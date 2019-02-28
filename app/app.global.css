@@ -1,0 +1,157 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+body {
+  position: relative;
+  color: white;
+  height: 100vh;
+  background-color: #000000;
+  font-family: Arial, Helvetica, Helvetica Neue, serif;
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+
+p {
+  font-size: 24px;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: white;
+  opacity: 0.75;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.tab-panel .tab {
+  outline: none;
+  font-size: 12px !important;
+}
+
+@font-face {
+  font-family: "Digital";
+  src: url("../resources/digital-7/digital-7.ttf");
+}
+
+.tab-panel button:first-child {
+  width: 100px !important;
+  display: block !important;
+}
+
+button.tab {
+  color: #9ca1a7;
+}
+
+button.tab:hover {
+  background-color: #1a1a1b;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-right-width: 0px !important;
+}
+
+button.tab.active {
+  border-bottom-width: 0px !important;
+  color: #f1f3f4 !important;
+  background-color: #313639 !important;
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  border-right-width: 0px !important;
+}
+
+.pynge {
+  padding: 5px 5px 0;
+}
+
+.pynge button.tab {
+  border: 1px solid #313639 !important;
+  border-top-right-radius: 5px !important;
+  border-top-left-radius: 5px !important;
+}
+
+.pynge button.tab .closeTab {
+  color: #9ca1a7;
+}
+
+.pynge button.tab .closeTab:hover {
+  opacity: .1;
+}
+
+.pynge button.tab .closeTab:after, .pynge button.tab .closeTab:before {
+  background: #9ca1a7;
+  height: 2px;
+}
+
+button.tab-container-button {
+  width: 100px;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 3px;
+  color: green;
+  background-color: transparent;
+}
+
+fieldset {
+  border: 2px solid white;
+  border-radius: 5px;
+  color: green;
+}
+
+.rounded-description-container {
+  color: green;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px 10px;
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.8em;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  color: black;
+  background: white;
+}
+
+textarea {
+  background: transparent;
+  color: green;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-size: 1em;
+}
+
+input.greenText {
+  color: green;
+  border-color: white;
+  background-color: transparent;
+  font-size: 1em;
+}
