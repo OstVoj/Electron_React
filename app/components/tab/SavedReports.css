@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.activeRow {
+  color: black;
+  background-color: white;
+}

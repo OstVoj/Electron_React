@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `records` (
 	`id`	integer NOT NULL,
 	`officerId`	varchar ( 30 ),
 	`type`	varchar ( 30 ) NOT NULL,
+  `recordType`	varchar ( 30 ) NOT NULL,
 	`jsonData`	text NOT NULL,
 	PRIMARY KEY(`id`)
 );

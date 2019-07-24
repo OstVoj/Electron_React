@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Login.css';
 import Loading from './Loading';
+import Alert from './dialog/Alert';
 
 const si = require('systeminformation');
 
@@ -24,10 +25,12 @@ type States = {
   password: string,
   companyId: string,
   machineId: string,
-  version: string
+  version: string,
+  isAlertVisible: boolean,
+  message: string
 };
 
-export default class Home extends Component<Props, States> {
+export default class Login extends Component<Props, States> {
   props: Props;
 
   state = {
@@ -35,7 +38,9 @@ export default class Home extends Component<Props, States> {
     password: 'hubert',
     companyId: 'ecteam',
     machineId: '',
-    version: ''
+    version: '',
+    isAlertVisible: false,
+    message: ''
   };
 
   componentDidMount() {
@@ -61,7 +66,10 @@ export default class Home extends Component<Props, States> {
       const { userId, password, companyId, machineId } = this.state;
       const { error } = loginStore.setting;
       if (error) {
-        alert('Get Setting Failure!');
+        this.setState({
+          isAlertVisible: true,
+          message: 'Get Setting Failure!'
+        });
       } else {
         const { httpHost } = loginStore.setting;
         login(httpHost, userId, password, companyId, machineId);
@@ -71,7 +79,10 @@ export default class Home extends Component<Props, States> {
       if (loginStore.auth) {
         const { success } = loginStore.auth;
         if (success === '0') {
-          alert('Login Failure!');
+          this.setState({
+            isAlertVisible: true,
+            message: 'Login Failure!'
+          });
         } else if (success === '1') {
           const { history } = this.props;
           history.push('/home');
@@ -107,9 +118,19 @@ export default class Home extends Component<Props, States> {
   };
 
   render() {
-    const { userId, password, companyId, machineId, version } = this.state;
+    const {
+      userId,
+      password,
+      companyId,
+      machineId,
+      version,
+      isAlertVisible,
+      message
+    } = this.state;
     const { loginStore } = this.props;
-    const loading = !(loginStore.getSettingCompleted || loginStore.loginCompleted);
+    const loading = !(
+      loginStore.getSettingCompleted || loginStore.loginCompleted
+    );
 
     return (
       <div className={styles.container} data-tid="container">
@@ -148,6 +169,15 @@ export default class Home extends Component<Props, States> {
           <div>{version}</div>
         </div>
         <Loading loading={loading} />
+        <Alert
+          onClose={() =>
+            this.setState({
+              isAlertVisible: false
+            })
+          }
+          show={isAlertVisible}
+          message={message}
+        />
       </div>
     );
   }

@@ -95,6 +95,13 @@ export default class MenuBuilder {
       label: 'View',
       submenu: [
         {
+          label: 'Application Log',
+          accelerator: 'Command+L',
+          click: () => {
+            this.mainWindow.webContents.reload();
+          }
+        },
+        {
           label: 'Reload',
           accelerator: 'Command+R',
           click: () => {
@@ -120,6 +127,13 @@ export default class MenuBuilder {
     const subMenuViewProd = {
       label: 'View',
       submenu: [
+        {
+          label: 'Application Log',
+          accelerator: 'Command+L',
+          click: () => {
+            this.mainWindow.webContents.reload();
+          }
+        },
         {
           label: 'Toggle Full Screen',
           accelerator: 'Ctrl+Command+F',
@@ -204,6 +218,13 @@ export default class MenuBuilder {
           process.env.NODE_ENV === 'development'
             ? [
                 {
+                  label: 'Application Log',
+                  accelerator: 'Command+L',
+                  click: () => {
+                    this.mainWindow.webContents.reload();
+                  }
+                },
+                {
                   label: '&Reload',
                   accelerator: 'Ctrl+R',
                   click: () => {
@@ -228,6 +249,13 @@ export default class MenuBuilder {
                 }
               ]
             : [
+                {
+                  label: 'Application Log',
+                  accelerator: 'Command+L',
+                  click: () => {
+                    this.mainWindow.webContents.reload();
+                  }
+                },
                 {
                   label: 'Toggle &Full Screen',
                   accelerator: 'F11',

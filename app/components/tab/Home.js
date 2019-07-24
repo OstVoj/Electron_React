@@ -2,17 +2,47 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 // @flow
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import get from 'lodash.get';
 import styles from './Home.css';
+import BlinkEnvelope from './common/BlinkEnvelope';
 
 type Props = {
+  chatStore: Object,
+  loginStore: Object,
   onNewTab: (title: string) => void
 };
 
-export default class Home extends Component<Props> {
+class Home extends Component<Props> {
   props: Props;
 
   render() {
-    const { onNewTab } = this.props;
+    const { onNewTab, chatStore } = this.props;
+
+    const unreadMessages = get(chatStore, 'unreadMessages');
+    const users = get(chatStore, 'users');
+
+    const { NODE_ENV } = process.env;
+    const env = NODE_ENV === 'development' ? 'dev' : 'prod';
+    const { loginStore } = this.props;
+    const auth = get(loginStore, 'auth');
+    const companyId = get(auth, 'companyId');
+
+    let unreadMessageCount = 0;
+    const groupUnreadCount = get(unreadMessages, `${env}-${companyId}`);
+    if (groupUnreadCount) {
+      unreadMessageCount += groupUnreadCount;
+    }
+    if (users) {
+      users.map((user: any) => {
+        const messageCount = get(unreadMessages, user);
+        if (messageCount) {
+          unreadMessageCount += messageCount;
+        }
+        return 1;
+      });
+    }
 
     return (
       <div className={styles.container} data-tid="container">
@@ -21,7 +51,6 @@ export default class Home extends Component<Props> {
           <div className={styles.button} onClick={() => onNewTab('DISPATCHES')}>
             DISPATCHES
           </div>
-          <div className={styles.button} />
           <div
             className={styles.button}
             onClick={() => onNewTab('PATROL / DAR')}
@@ -58,14 +87,14 @@ export default class Home extends Component<Props> {
           </div>
           <div
             className={styles.button}
-            onClick={() => onNewTab('Parking Violation')}
+            onClick={() => onNewTab('PARKING VIOLATION')}
           >
             <div>Parking</div>
             <div>Violation</div>
           </div>
           <div
             className={styles.button}
-            onClick={() => onNewTab('Warning Notice')}
+            onClick={() => onNewTab('WARNING NOTICE')}
           >
             <div>Warning</div>
             <div>Notice</div>
@@ -79,7 +108,7 @@ export default class Home extends Component<Props> {
           </div>
           <div
             className={styles.button}
-            onClick={() => onNewTab('Guard Tour Report')}
+            onClick={() => onNewTab('GUARD TOUR REPORT')}
           >
             <div>Guard Tour</div>
             <div>Report</div>
@@ -175,19 +204,25 @@ export default class Home extends Component<Props> {
             <div>VEHICLE</div>
             <div>INSPECTION</div>
           </div>
-          <div
-            className={styles.button}
-            onClick={() => onNewTab('PARKING ENFORCEMENT')}
-          >
-            <div>PARKING</div>
-            <div>ENFORCEMENT</div>
-          </div>
           <div className={styles.button} onClick={() => onNewTab('TIME CLOCK')}>
             TIME CLOCK
           </div>
-          <div className={styles.button} />
+          <div className={styles.button} onClick={() => onNewTab('CHAT')}>
+            CHAT
+            {unreadMessageCount > 0 && <BlinkEnvelope />}
+          </div>
         </div>
       </div>
     );
   }
 }
+
+function mapStateToProps(state: PropTypes.object) {
+  return {
+    chatStore: state.chat,
+    loginStore: state.login,
+    ...this.props
+  };
+}
+
+export default connect(mapStateToProps)(Home);

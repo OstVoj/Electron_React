@@ -1,4 +1,4 @@
-// flow-typed signature: 4a3730bd430e5f9c328f1d081a9ee4b6
+// flow-typed signature: 975fbd40f995d813ce38c0457a6c8b02
 // flow-typed version: <<STUB>>/react-spinners_v^0.5.1/flow_v0.77.0
 
 /**
@@ -98,6 +98,10 @@ declare module 'react-spinners/helpers/index' {
   declare module.exports: any;
 }
 
+declare module 'react-spinners/helpers/proptypes' {
+  declare module.exports: any;
+}
+
 declare module 'react-spinners/MoonLoader' {
   declare module.exports: any;
 }
@@ -179,6 +183,10 @@ declare module 'react-spinners/src/HashLoader' {
 }
 
 declare module 'react-spinners/src/helpers/index' {
+  declare module.exports: any;
+}
+
+declare module 'react-spinners/src/helpers/proptypes' {
   declare module.exports: any;
 }
 
@@ -296,6 +304,9 @@ declare module 'react-spinners/HashLoader.js' {
 declare module 'react-spinners/helpers/index.js' {
   declare module.exports: $Exports<'react-spinners/helpers/index'>;
 }
+declare module 'react-spinners/helpers/proptypes.js' {
+  declare module.exports: $Exports<'react-spinners/helpers/proptypes'>;
+}
 declare module 'react-spinners/index' {
   declare module.exports: $Exports<'react-spinners'>;
 }
@@ -364,6 +375,9 @@ declare module 'react-spinners/src/HashLoader.jsx' {
 }
 declare module 'react-spinners/src/helpers/index.js' {
   declare module.exports: $Exports<'react-spinners/src/helpers/index'>;
+}
+declare module 'react-spinners/src/helpers/proptypes.js' {
+  declare module.exports: $Exports<'react-spinners/src/helpers/proptypes'>;
 }
 declare module 'react-spinners/src/index.js' {
   declare module.exports: $Exports<'react-spinners/src/index'>;

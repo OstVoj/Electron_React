@@ -1,5 +1,3 @@
-import utility from '../utils/utility';
-
 const SQL = require('sql.js');
 const fs = require('fs');
 const path = require('path');
@@ -49,8 +47,12 @@ const createDb = (dbPath: string) => {
   }
 };
 
-const addIndividual = (dbPath: string, jsonData: string, callback) => {
-  const refId = utility.getRandomInt();
+const addIndividual = (
+  dbPath: string,
+  refId: number,
+  jsonData: string,
+  callback
+) => {
   const tableName = 'individuals';
   const keyValue = {
     columns: ['refId', 'jsonData'],
@@ -58,10 +60,10 @@ const addIndividual = (dbPath: string, jsonData: string, callback) => {
   };
   const db = SQL.dbOpen(dbPath);
   if (db !== null) {
-    let query = 'INSERT OR REPLACE INTO `' + tableName;
-    query += '` (`' + keyValue.columns.join('`, `') + '`)';
-    query += ' VALUES (' + placeHoldersString(keyValue.values.length) + ')';
-    let statement = db.prepare(query);
+    let query = `INSERT OR REPLACE INTO \`${tableName}`;
+    query += `\` (\`${keyValue.columns.join('`, `')}\`)`;
+    query += ` VALUES (${placeHoldersString(keyValue.values.length)})`;
+    const statement = db.prepare(query);
     try {
       if (statement.run(keyValue.values)) {
         console.log('saved');
@@ -79,15 +81,54 @@ const addIndividual = (dbPath: string, jsonData: string, callback) => {
   }
 };
 
-const updateIndividual = (dbPath: string, jsonData: string, refId: number, callback) => {
+const addVehicle = (
+  dbPath: string,
+  refId: number,
+  jsonData: string,
+  callback
+) => {
+  const tableName = 'vehicles';
+  const keyValue = {
+    columns: ['refId', 'jsonData'],
+    values: [refId, jsonData]
+  };
+  const db = SQL.dbOpen(dbPath);
+  if (db !== null) {
+    let query = `INSERT OR REPLACE INTO \`${tableName}`;
+    query += `\` (\`${keyValue.columns.join('`, `')}\`)`;
+    query += ` VALUES (${placeHoldersString(keyValue.values.length)})`;
+    const statement = db.prepare(query);
+    try {
+      if (statement.run(keyValue.values)) {
+        console.log('saved');
+      } else {
+        console.log('model.saveFormData', 'Query failed for', keyValue.values);
+      }
+    } catch (error) {
+      console.log('model.saveFormData', error.message);
+    } finally {
+      SQL.dbClose(db, dbPath);
+      if (typeof callback === 'function') {
+        callback();
+      }
+    }
+  }
+};
+
+const updateIndividual = (
+  dbPath: string,
+  jsonData: string,
+  refId: number,
+  callback
+) => {
   const tableName = 'individuals';
   const db = SQL.dbOpen(dbPath);
   if (db !== null) {
-    let query = 'UPDATE `' + tableName + '`';
+    let query = `UPDATE \`${tableName}\``;
     query += ' SET ';
-    query += '`jsonData`=\'' + jsonData + '\'';
+    query += `\`jsonData\`='${jsonData}'`;
     query += ' WHERE `refId` IS ?';
-    let statement = db.prepare(query);
+    const statement = db.prepare(query);
 
     try {
       if (statement.run([refId])) {
@@ -107,7 +148,7 @@ const updateIndividual = (dbPath: string, jsonData: string, refId: number, callb
 };
 
 const getIndividuals = (dbPath: string, callback) => {
-  const db = SQL.dbOpen(dbPath)
+  const db = SQL.dbOpen(dbPath);
   if (db !== null) {
     const query = 'SELECT * FROM `individuals`';
     try {
@@ -131,20 +172,18 @@ const getIndividuals = (dbPath: string, callback) => {
 };
 
 const getIndividual = (dbPath: string, refId: number, callback) => {
-  const db = SQL.dbOpen(dbPath)
+  const db = SQL.dbOpen(dbPath);
   if (db !== null) {
-    const query = 'SELECT * FROM `individuals` WHERE `refId` IS ?'
-    const statement = db.prepare(query, [refId])
+    const query = `SELECT * FROM \`individuals\` WHERE \`refId\`=${refId}`;
     try {
-      if (statement.step()) {
-        const values = [statement.get()];
-        const columns = statement.getColumnNames();
-        const row = rowsFromSqlDataObject({values: values, columns: columns});
+      let row = db.exec(query);
+      if (row !== undefined && row.length > 0) {
+        row = rowsFromSqlDataObject(row[0]);
         if (typeof callback === 'function') {
           callback(row);
         }
       } else {
-        console.log('model.getPeople', 'No data found for person_id =', pid);
+        callback(null);
       }
     } catch (error) {
       console.log('model.getPeople', error.message);
@@ -157,8 +196,8 @@ const getIndividual = (dbPath: string, refId: number, callback) => {
 const deleteIndividual = (dbPath: string, refId: number, callback) => {
   const db = SQL.dbOpen(dbPath);
   if (db !== null) {
-    let query = 'DELETE FROM `individuals` WHERE `refId` IS ?';
-    let statement = db.prepare(query);
+    const query = 'DELETE FROM `individuals` WHERE `refId` IS ?';
+    const statement = db.prepare(query);
     try {
       if (statement.run([refId])) {
       } else {
@@ -176,19 +215,70 @@ const deleteIndividual = (dbPath: string, refId: number, callback) => {
   }
 };
 
-const addRecord = (dbPath: string, officerId: string, type: string, jsonData: string, callback) => {
-  const id = utility.getRandomInt();
+const getVehicle = (dbPath: string, refId: number, callback) => {
+  const db = SQL.dbOpen(dbPath);
+  if (db !== null) {
+    const query = `SELECT * FROM \`vehicles\` WHERE \`refId\`=${refId}`;
+    try {
+      let row = db.exec(query);
+      if (row !== undefined && row.length > 0) {
+        row = rowsFromSqlDataObject(row[0]);
+        if (typeof callback === 'function') {
+          callback(row);
+        }
+      } else {
+        callback(null);
+      }
+    } catch (error) {
+      console.log('model.getPeople', error.message);
+    } finally {
+      SQL.dbClose(db, dbPath);
+    }
+  }
+};
+
+const deleteVehicle = (dbPath: string, refId: number, callback) => {
+  const db = SQL.dbOpen(dbPath);
+  if (db !== null) {
+    const query = 'DELETE FROM `vehicles` WHERE `refId` IS ?';
+    const statement = db.prepare(query);
+    try {
+      if (statement.run([refId])) {
+      } else {
+        console.log('model.deletePerson', 'No data found for person_id =');
+      }
+    } catch (error) {
+      console.log('model.deletePerson', error.message);
+    } finally {
+      SQL.dbClose(db, dbPath);
+      if (typeof callback === 'function') {
+        console.log('deleted');
+        callback();
+      }
+    }
+  }
+};
+
+const addRecord = (
+  dbPath: string,
+  id: number,
+  officerId: string,
+  type: string,
+  recordType: string,
+  jsonData: string,
+  callback
+) => {
   const tableName = 'records';
   const keyValue = {
-    columns: ['officerId', 'type', 'jsonData'],
-    values: [officerId, type, jsonData]
+    columns: ['id', 'officerId', 'type', 'recordType', 'jsonData'],
+    values: [id, officerId, type, recordType, jsonData]
   };
   const db = SQL.dbOpen(dbPath);
   if (db !== null) {
-    let query = 'INSERT OR REPLACE INTO `' + tableName;
-    query += '` (`' + keyValue.columns.join('`, `') + '`)';
-    query += ' VALUES (' + placeHoldersString(keyValue.values.length) + ')';
-    let statement = db.prepare(query);
+    let query = `INSERT OR REPLACE INTO \`${tableName}`;
+    query += `\` (\`${keyValue.columns.join('`, `')}\`)`;
+    query += ` VALUES (${placeHoldersString(keyValue.values.length)})`;
+    const statement = db.prepare(query);
     try {
       if (statement.run(keyValue.values)) {
         console.log('saved');
@@ -200,6 +290,161 @@ const addRecord = (dbPath: string, officerId: string, type: string, jsonData: st
     } finally {
       SQL.dbClose(db, dbPath);
       if (typeof callback === 'function') {
+        callback();
+      }
+    }
+  }
+};
+
+const deleteRecord = (dbPath: string, id: number, callback) => {
+  const db = SQL.dbOpen(dbPath);
+  if (db !== null) {
+    const query = 'DELETE FROM `records` WHERE `id` IS ?';
+    const statement = db.prepare(query);
+    try {
+      if (statement.run([id])) {
+      } else {
+        console.log('model.deletePerson', 'No data found for person_id =', pid);
+      }
+    } catch (error) {
+      console.log('model.deletePerson', error.message);
+    } finally {
+      SQL.dbClose(db, dbPath);
+      if (typeof callback === 'function') {
+        console.log('deleted');
+        callback();
+      }
+    }
+  }
+};
+
+const getRecords = (dbPath: string) => {
+  const db = SQL.dbOpen(dbPath);
+  if (db !== null) {
+    const query = 'SELECT * FROM `records`';
+    try {
+      let row = db.exec(query);
+      if (row !== undefined && row.length > 0) {
+        row = rowsFromSqlDataObject(row[0]);
+        const promise = new Promise(resolve => {
+          resolve(row);
+        });
+        return promise.then(response => response).catch(err => err);
+      }
+      const promise = new Promise(resolve => {
+        resolve(null);
+      });
+      return promise.then(response => response).catch(err => err);
+    } catch (error) {
+      console.log('model.getPeople', error.message);
+    } finally {
+      SQL.dbClose(db, dbPath);
+    }
+  } else {
+    console.log('can not open db');
+  }
+};
+
+const getRecordById = (dbPath: string, id: number, callback) => {
+  const db = SQL.dbOpen(dbPath);
+  if (db !== null) {
+    const query = 'SELECT * FROM `records` WHERE `id` IS ?';
+    const statement = db.prepare(query, [id]);
+    try {
+      if (statement.step()) {
+        const values = [statement.get()];
+        const columns = statement.getColumnNames();
+        const row = rowsFromSqlDataObject({ values, columns });
+        if (typeof callback === 'function') {
+          callback(row);
+        }
+      } else {
+        console.log('model.getPeople', 'No data found for person_id =', pid);
+      }
+    } catch (error) {
+      console.log('model.getPeople', error.message);
+    } finally {
+      SQL.dbClose(db, dbPath);
+    }
+  }
+};
+
+const addAttachment = (
+  dbPath: string,
+  refId: number,
+  fileName: string,
+  callback
+) => {
+  const tableName = 'attachments';
+  const keyValue = {
+    columns: ['refId', 'filename'],
+    values: [refId, fileName]
+  };
+  const db = SQL.dbOpen(dbPath);
+  if (db !== null) {
+    let query = `INSERT OR REPLACE INTO \`${tableName}`;
+    query += `\` (\`${keyValue.columns.join('`, `')}\`)`;
+    query += ` VALUES (${placeHoldersString(keyValue.values.length)})`;
+    const statement = db.prepare(query);
+    try {
+      if (statement.run(keyValue.values)) {
+        console.log('saved');
+      } else {
+        console.log('model.saveFormData', 'Query failed for', keyValue.values);
+      }
+    } catch (error) {
+      console.log('model.saveFormData', error.message);
+    } finally {
+      SQL.dbClose(db, dbPath);
+      if (typeof callback === 'function') {
+        callback();
+      }
+    }
+  }
+};
+
+const getAttachments = (dbPath: string, refId: number, callback) => {
+  const db = SQL.dbOpen(dbPath);
+  if (db !== null) {
+    const query = `SELECT * FROM \`attachments\` WHERE \`refId\`=${refId}`;
+    try {
+      let row = db.exec(query);
+      if (row !== undefined && row.length > 0) {
+        row = rowsFromSqlDataObject(row[0]);
+        if (typeof callback === 'function') {
+          callback(row);
+        }
+      } else {
+        callback(null);
+      }
+    } catch (error) {
+      console.log('model.getPeople', error.message);
+    } finally {
+      SQL.dbClose(db, dbPath);
+    }
+  }
+};
+
+const deleteAttachments = (dbPath: string, refId: number, callback) => {
+  const db = SQL.dbOpen(dbPath);
+  if (db !== null) {
+    const query = 'DELETE FROM `attachments` WHERE `refId` IS ?';
+    const statement = db.prepare(query);
+    try {
+      if (statement.run([refId])) {
+      } else {
+        console.log(
+          'model.deletePerson',
+          'No data found for person_id =',
+          refId
+        );
+      }
+    } catch (error) {
+      console.log('model.deletePerson', error.message);
+    } finally {
+      SQL.dbClose(db, dbPath);
+      if (typeof callback === 'function') {
+        console.log('deleted');
         callback();
       }
     }
@@ -224,20 +469,20 @@ SQL.dbOpen = (databaseFileName: string) => {
 };
 
 const rowsFromSqlDataObject = object => {
-  let data = {};
+  const data = {};
   let i = 0;
   let j = 0;
-  for (let valueArray of object.values) {
+  for (const valueArray of object.values) {
     data[i] = {};
     j = 0;
-    for (let column of object.columns) {
-      Object.assign(data[i], {[column]: valueArray[j]});
+    for (const column of object.columns) {
+      Object.assign(data[i], { [column]: valueArray[j] });
       j++;
     }
     i++;
   }
   return data;
-}
+};
 
 SQL.dbClose = (databaseHandle, databaseFileName) => {
   try {
@@ -255,9 +500,18 @@ SQL.dbClose = (databaseHandle, databaseFileName) => {
 export default {
   initDb,
   addIndividual,
+  addVehicle,
   getIndividuals,
   getIndividual,
   deleteIndividual,
+  getVehicle,
+  deleteVehicle,
   updateIndividual,
-  addRecord
+  addRecord,
+  deleteRecord,
+  getRecords,
+  getRecordById,
+  getAttachments,
+  addAttachment,
+  deleteAttachments
 };

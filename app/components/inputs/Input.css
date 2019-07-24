@@ -1,0 +1,39 @@
+.label,
+.input {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border-top: 2px solid transparent;
+}
+
+.input {
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  width: 100%;
+  padding: 0 3px;
+  box-sizing: border-box;
+}
+
+.label {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.textInput {
+}
+
+.textareaInput {
+}
+
+.labelColumn {
+  display: flex;
+  align-items: center;
+}
+
+.inputCheckboxColumn {
+  width: 30px !important;
+}

@@ -1,0 +1,13 @@
+.activeRow {
+  color: black;
+  background-color: white;
+}
+
+tr {
+  cursor: pointer;
+}
+
+.passdownList {
+  max-height: calc(100vh - 290px);
+  overflow: auto;
+}

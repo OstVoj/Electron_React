@@ -21,15 +21,10 @@ export function setLoading(loading: boolean) {
   };
 }
 
-export function getLastTimeClockEntry(
-  httpHost: string,
-  userId: string,
-  password: string,
-  companyId: string
-) {
+export function getLastTimeClockEntry() {
   return (dispatch: Dispatch) => {
     api
-      .getLastTimeClockEntry(httpHost, userId, password, companyId)
+      .getLastTimeClockEntry()
       .then(res => res.json())
       .then(data => dispatch(getLastTimeClockEntrySuccess(data)))
       .catch(err => {
@@ -40,10 +35,6 @@ export function getLastTimeClockEntry(
 }
 
 export function uploadTimeClock(
-  httpHost: string,
-  userId: string,
-  password: string,
-  companyId: string,
   lat: number,
   lon: number,
   imagePath: string,
@@ -52,9 +43,6 @@ export function uploadTimeClock(
   return (dispatch: Dispatch) => {
     dispatch(setLoading(true));
     const form = new FormData();
-    form.append('userId', userId);
-    form.append('password', password);
-    form.append('cid', companyId);
     form.append('lat', `${lat}`);
     form.append('lon', `${lon}`);
     form.append('io', `${io}`);
@@ -62,7 +50,7 @@ export function uploadTimeClock(
     const blob = new Blob([contents], { type: 'image/jpg' });
     form.append('uploadedfile', blob, 'image.jpg');
     api
-      .uploadTimeClock(httpHost, form)
+      .uploadTimeClock(form)
       .then(res => res.json())
       .then(() => dispatch(uploadTimeClockSuccess()))
       .catch(err => {

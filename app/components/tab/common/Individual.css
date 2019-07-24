@@ -1,0 +1,9 @@
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 300px;
+}
+.select {
+  width: 173px;
+}

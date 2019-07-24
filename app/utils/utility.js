@@ -36,13 +36,6 @@ const userIdToName = (userId: string, officers: Array) => {
   return name;
 };
 
-const getCurrentLatLon = () => {
-  return {
-    lat: 30.32602,
-    lon: -81.66208
-  };
-};
-
 const validateZipCode = (zipCode: string) => {
   const zipCodePattern = /^\d{5}$|^\d{5}-\d{4}$/;
   return zipCodePattern.test(zipCode);
@@ -56,7 +49,7 @@ const getRandomInt = () => {
 export default {
   startTime,
   userIdToName,
-  getCurrentLatLon,
   validateZipCode,
-  getRandomInt
+  getRandomInt,
+  checkTime
 };

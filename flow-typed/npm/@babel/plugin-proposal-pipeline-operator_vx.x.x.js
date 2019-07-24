@@ -1,4 +1,4 @@
-// flow-typed signature: 7bd8a6e11b7ecb15a696f33b3327f9fa
+// flow-typed signature: 9fd3f690bdafec18c81a4b752dd01bde
 // flow-typed version: <<STUB>>/@babel/plugin-proposal-pipeline-operator_v^7.2.0/flow_v0.77.0
 
 /**
@@ -190,7 +190,15 @@ declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/minimal/p
   declare module.exports: any;
 }
 
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/await/exec' {
+  declare module.exports: any;
+}
+
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/await/input' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/await/output' {
   declare module.exports: any;
 }
 
@@ -215,6 +223,62 @@ declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/bas
 }
 
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/basic/output' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-init/exec' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-init/input' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-init/output' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-update/exec' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-update/input' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-update/output' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for/exec' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for/input' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for/output' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/if/input' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/if/output' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/indirect-eval/exec' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/indirect-eval/input' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/indirect-eval/output' {
   declare module.exports: any;
 }
 
@@ -262,7 +326,31 @@ declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/top
   declare module.exports: any;
 }
 
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/while/exec' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/while/input' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/while/output' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/yield/exec' {
+  declare module.exports: any;
+}
+
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/yield/input' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/yield/output' {
+  declare module.exports: any;
+}
+
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart+arrow/await/exec' {
   declare module.exports: any;
 }
 
@@ -397,8 +485,14 @@ declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/minimal/p
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/minimal/precedence/output.js' {
   declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/minimal/precedence/output'>;
 }
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/await/exec.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/await/exec'>;
+}
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/await/input.js' {
   declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/await/input'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/await/output.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/await/output'>;
 }
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/bare-function/exec.js' {
   declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/bare-function/exec'>;
@@ -417,6 +511,48 @@ declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/bas
 }
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/basic/output.js' {
   declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/basic/output'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-init/exec.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-init/exec'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-init/input.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-init/input'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-init/output.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-init/output'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-update/exec.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-update/exec'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-update/input.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-update/input'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-update/output.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for-update/output'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for/exec.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for/exec'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for/input.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for/input'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for/output.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/for/output'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/if/input.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/if/input'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/if/output.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/if/output'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/indirect-eval/exec.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/indirect-eval/exec'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/indirect-eval/input.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/indirect-eval/input'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/indirect-eval/output.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/indirect-eval/output'>;
 }
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/nested/exec.js' {
   declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/nested/exec'>;
@@ -451,8 +587,26 @@ declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/top
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/topic-inside-arrow-function/output.js' {
   declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/topic-inside-arrow-function/output'>;
 }
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/while/exec.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/while/exec'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/while/input.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/while/input'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/while/output.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/while/output'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/yield/exec.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/yield/exec'>;
+}
 declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/yield/input.js' {
   declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/yield/input'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/yield/output.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart/yield/output'>;
+}
+declare module '@babel/plugin-proposal-pipeline-operator/test/fixtures/smart+arrow/await/exec.js' {
+  declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/fixtures/smart+arrow/await/exec'>;
 }
 declare module '@babel/plugin-proposal-pipeline-operator/test/index.js' {
   declare module.exports: $Exports<'@babel/plugin-proposal-pipeline-operator/test/index'>;

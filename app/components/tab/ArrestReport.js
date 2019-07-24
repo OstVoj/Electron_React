@@ -1,38 +1,41 @@
-/* eslint-disable no-restricted-globals */
-/* eslint-disable no-alert */
+/* eslint-disable react/no-unused-state */
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Select from 'react-select';
+import get from 'lodash.get';
+import findIndex from 'lodash.findindex';
+import isEmpty from 'lodash.isempty';
+import AccountSelector from './common/AccountSelector';
 import * as TabActions from '../../actions/tab';
-import styles from './ArrestReport.css';
-import Modal from '../Modal';
-import Individual from './Individual';
-import model from '../../service/model';
-
-const _ = require('lodash');
-const { remote } = require('electron');
-
-const { app } = remote;
-const dbPath = `${app.getPath('home')}/${process.env.DB_PATH}/${
-  process.env.DB_NAME
-}`;
+import Individuals from './common/Individuals';
+import Attachments from './common/Attachments';
+import Alert from '../dialog/Alert';
+import Confirm from '../dialog/Confirm';
+import TabButtonContainer from './common/TabButtonContainer';
+import Cotainer from '../sections/Container';
+import RoundedSection from '../sections/RoundedSection';
+import Fieldset from '../sections/Fieldset';
+import Col from '../sections/Col';
+import Row from '../sections/Row';
+import HorizontalInput from '../inputs/HorizontalInput';
+import Input from '../inputs/Input';
 
 const tabName = 'ARREST REPORT';
 
 type Props = {
   loginStore: Object,
   tabStore: Object,
-  setTabProperties: () => void,
+  setTabProperties: (tabName: string, tabId: number, props: Object) => void,
+  saveRecord: (recordType: string, props: Object) => void,
   onCloseTab: () => void
 };
 
 type States = {
+  id: number,
   selectedAccount: Object,
-  isModalVisible: boolean,
-  individuals: Object,
+  individuals: Array<any>,
   selectedIndividualId: number,
   warrant: string,
   court: string,
@@ -48,15 +51,21 @@ type States = {
   chkCitizen: boolean,
   chkProperty: boolean,
   chkLaw: boolean,
-  notes: string
+  notes: string,
+  isAlertVisible: boolean,
+  isConfirmVisible: boolean,
+  dlgType: number,
+  message: string,
+  attachments: Array<string>,
+  selectedAttachment: string
 };
 
 class ArrestReport extends Component<Props, States> {
   props: Props;
 
   state = {
+    id: 0,
     selectedAccount: {},
-    isModalVisible: false,
     individuals: [],
     selectedIndividualId: 0,
     warrant: '',
@@ -73,7 +82,13 @@ class ArrestReport extends Component<Props, States> {
     chkCitizen: false,
     chkProperty: false,
     chkLaw: false,
-    notes: ''
+    notes: '',
+    isAlertVisible: false,
+    isConfirmVisible: false,
+    dlgType: 0,
+    message: '',
+    attachments: [],
+    selectedAttachment: ''
   };
 
   componentDidMount() {}
@@ -83,28 +98,27 @@ class ArrestReport extends Component<Props, States> {
   componentWillUnmount() {}
 
   handleCloseModal = (individual: Object) => {
-    this.setState({
-      isModalVisible: false
-    });
-    if (individual.refId) {
-      const { tabStore, setTabProperties } = this.props;
-      const { props, tabId } = tabStore.selectedTabProps;
-      const individuals = props.individuals.filter(
-        item => item.refId === individual.refId
-      );
-      if (individuals.length === 0) {
-        props.individuals.push(individual);
-      } else {
-        props.individuals.splice(
-          _.findIndex(
-            props.individuals,
-            item => item.refId === individual.refId
-          ),
-          1,
-          individual
+    if (individual) {
+      if (individual.refId) {
+        const { tabStore, setTabProperties } = this.props;
+        const { props, tabId } = tabStore.selectedTabProps;
+        const individuals = props.individuals.filter(
+          item => item.refId === individual.refId
         );
+        if (individuals.length === 0) {
+          props.individuals.push(individual);
+        } else {
+          props.individuals.splice(
+            findIndex(
+              props.individuals,
+              item => item.refId === individual.refId
+            ),
+            1,
+            individual
+          );
+        }
+        setTabProperties(tabName, tabId, props);
       }
-      setTabProperties(tabName, tabId, props);
     }
   };
 
@@ -115,20 +129,51 @@ class ArrestReport extends Component<Props, States> {
     setTabProperties(tabName, tabId, props);
   };
 
+  onConfirmClick = () => {
+    const { dlgType } = this.state;
+    if (dlgType === 1) {
+      const { onCloseTab } = this.props;
+      onCloseTab();
+    } else if (dlgType === 2) {
+      const { tabStore, setTabProperties } = this.props;
+      const { tabId } = tabStore.selectedTabProps;
+      setTabProperties(tabName, tabId, {
+        selectedAccount: {},
+        individuals: [],
+        selectedIndividualId: 0,
+        warrant: '',
+        court: '',
+        agency: '',
+        casenumber: '',
+        gang: '',
+        alias: '',
+        chkFelony: false,
+        chkMisdemeanor: false,
+        chkCivil: false,
+        chkOther: false,
+        chkSecurity: false,
+        chkCitizen: false,
+        chkProperty: false,
+        chkLaw: false,
+        notes: '',
+        attachments: []
+      });
+    }
+    this.setState({
+      isConfirmVisible: false
+    });
+  };
+
   onDeleteClick = () => {
     const { tabStore, setTabProperties } = this.props;
     const { props, tabId } = tabStore.selectedTabProps;
     const { selectedIndividualId, individuals } = props;
-    if (selectedIndividualId) {
-      if (confirm('Are you sure?')) {
-        const result = individuals.filter(
-          individual => individual.refId !== selectedIndividualId
-        );
-        props.selectedIndividualId = 0;
-        props.individuals = result;
-        setTabProperties(tabName, tabId, props);
-      }
-    }
+    const result = individuals.filter(
+      individual => individual.refId !== selectedIndividualId
+    );
+    props.selectedIndividualId = 0;
+    props.individuals = result;
+    setTabProperties(tabName, tabId, props);
   };
 
   onSaveClick = () => {
@@ -136,15 +181,22 @@ class ArrestReport extends Component<Props, States> {
     const { props } = tabStore.selectedTabProps;
     const { selectedAccount, individuals } = props;
     if (!selectedAccount.value) {
-      alert('An account must be selected');
+      this.setState({
+        isAlertVisible: true,
+        message: 'An account must be selected'
+      });
       return;
     }
     if (individuals.length === 0) {
-      alert('A single individual must be added to this report');
+      this.setState({
+        isAlertVisible: true,
+        message: 'A single individual must be added to this report'
+      });
       return;
     }
 
     const {
+      id,
       warrant,
       court,
       agency,
@@ -159,7 +211,8 @@ class ArrestReport extends Component<Props, States> {
       chkCitizen,
       chkProperty,
       chkLaw,
-      notes
+      notes,
+      attachments
     } = props;
 
     const { userId } = loginStore.auth;
@@ -179,91 +232,25 @@ class ArrestReport extends Component<Props, States> {
       chkProperty: chkProperty ? 1 : 0,
       chkLaw: chkLaw ? 1 : 0,
       notes,
-      account: selectedAccount.value
-    };
-    model.addRecord(
-      dbPath,
+      account: selectedAccount.value,
+      id,
+      attachments,
       userId,
-      selectedAccount.value,
-      JSON.stringify(jsonData)
-    );
-    individuals.forEach(individual => {
-      const data = JSON.stringify({
-        ...individual
-      });
-      model.addIndividual(dbPath, data);
-    });
-    const { onCloseTab } = this.props;
+      individuals
+    };
+
+    const { onCloseTab, saveRecord } = this.props;
+    saveRecord('arrest', jsonData);
     onCloseTab();
   };
 
   onClearClick = () => {
-    if (
-      confirm(
-        'Are you sure you want to completely clear this form? All changes made will be lost.'
-      )
-    ) {
-      const { tabStore, setTabProperties } = this.props;
-      const { tabId } = tabStore.selectedTabProps;
-      setTabProperties(tabName, tabId, {
-        selectedAccount: {},
-        isModalVisible: false,
-        individuals: [],
-        selectedIndividualId: 0,
-        warrant: '',
-        court: '',
-        agency: '',
-        casenumber: '',
-        gang: '',
-        alias: '',
-        chkFelony: false,
-        chkMisdemeanor: false,
-        chkCivil: false,
-        chkOther: false,
-        chkSecurity: false,
-        chkCitizen: false,
-        chkProperty: false,
-        chkLaw: false,
-        notes: ''
-      });
-    }
-  };
-
-  showModal = (isAdd: boolean) => {
-    const { tabStore, setTabProperties } = this.props;
-    const { props, tabId } = tabStore.selectedTabProps;
-    const { selectedIndividualId } = props;
-
-    if (isAdd) {
-      props.selectedIndividualId = 0;
-      setTabProperties(tabName, tabId, props);
-    } else if (!selectedIndividualId) {
-      return;
-    }
     this.setState({
-      isModalVisible: true
+      isConfirmVisible: true,
+      message:
+        'Are you sure you want to completely clear this form?<br>All changes made will be lost.',
+      dlgType: 2
     });
-  };
-
-  getIndividualRows = (individuals: Array) => {
-    const { tabStore } = this.props;
-    const { props } = tabStore.selectedTabProps;
-    const { selectedIndividualId } = props;
-    const result = individuals.map((individual: Object) => (
-      <tr
-        key={individual.refId}
-        className={
-          selectedIndividualId === individual.refId ? styles.activeRow : ''
-        }
-        onClick={() => this.handleChangeSelectedIndividual(individual.refId)}
-      >
-        <td>{individual.fname}</td>
-        <td>{individual.lname}</td>
-        <td>{individual.address}</td>
-        <td>{individual.city}</td>
-      </tr>
-    ));
-    return result;
   };
 
   handleChangeSelectedIndividual = (refId: number) => {
@@ -275,9 +262,9 @@ class ArrestReport extends Component<Props, States> {
   };
 
   handleInputChange = event => {
-    const target = event.target;
+    const { target } = event;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    const { name } = target;
 
     const { tabStore, setTabProperties } = this.props;
     const { props, tabId } = tabStore.selectedTabProps;
@@ -285,18 +272,45 @@ class ArrestReport extends Component<Props, States> {
     setTabProperties(tabName, tabId, props);
   };
 
+  onAddAttachment = (copyPath: string) => {
+    const { tabStore, setTabProperties } = this.props;
+    const { props, tabId } = tabStore.selectedTabProps;
+    props.attachments.push(copyPath);
+    setTabProperties(tabName, tabId, props);
+  };
+
+  onAddIndividual = () => {
+    const { tabStore, setTabProperties } = this.props;
+    const { props, tabId } = tabStore.selectedTabProps;
+
+    props.selectedIndividualId = 0;
+    setTabProperties(tabName, tabId, props);
+  };
+
+  onRemoveAttachment = (selectedAttachment: string) => {
+    const { tabStore, setTabProperties } = this.props;
+    const { props, tabId } = tabStore.selectedTabProps;
+    const attchments = props.attachments.filter(
+      attachment => attachment !== selectedAttachment
+    );
+    props.attachments = attchments;
+    setTabProperties(tabName, tabId, props);
+  };
+
   onCloseTab = () => {
-    if (confirm('Are you sure?')) {
-      const { onCloseTab } = this.props;
-      onCloseTab();
-    }
+    this.setState({
+      isConfirmVisible: true,
+      message: 'Are you sure?',
+      dlgType: 1
+    });
   };
 
   render() {
-    const { isModalVisible } = this.state;
+    const { isAlertVisible, isConfirmVisible, message } = this.state;
 
     const { loginStore, tabStore } = this.props;
-    const { props } = tabStore.selectedTabProps;
+    const props = get(tabStore.selectedTabProps, 'props');
+
     const {
       selectedAccount,
       warrant,
@@ -315,35 +329,13 @@ class ArrestReport extends Component<Props, States> {
       chkLaw,
       notes,
       individuals,
-      selectedIndividualId
-    } = _.isEmpty(props) ? this.state : props;
+      selectedIndividualId,
+      attachments
+    } = isEmpty(props) ? this.state : props;
 
-    const items = individuals.filter(
-      item => item.refId === selectedIndividualId
-    );
-    const selectedIndividual = items.length > 0 ? items[0] : {};
-
-    let selectValues = [];
     let callerTypesValues = [];
     if (loginStore.loader) {
-      const { accounts, callertypes } = loginStore.loader;
-      selectValues = accounts.map(account => {
-        const ret = account;
-        ret.value = account.accountId;
-        ret.label = account.name;
-        return ret;
-      });
-      selectValues.sort((a, b) => {
-        const nameA = a.name.toUpperCase();
-        const nameB = b.name.toUpperCase();
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      });
+      const { callertypes } = loginStore.loader;
       callerTypesValues = callertypes.map(callerType => {
         const item = callerType;
         item.value = callerType.id;
@@ -353,254 +345,203 @@ class ArrestReport extends Component<Props, States> {
     }
 
     return (
-      <div className={styles.container} data-tid="container">
-        <div className={styles.left}>
-          <div className="rounded-description-container">
-            <fieldset>
-              <legend>Individual Information</legend>
-              {!_.isEmpty(individuals) && (
-                <table>
-                  <thead>
-                    <tr>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Address</th>
-                      <th>City</th>
-                    </tr>
-                  </thead>
-                  <tbody>{this.getIndividualRows(individuals)}</tbody>
-                </table>
-              )}
-            </fieldset>
-            <div className={styles.buttonContainer}>
-              <button
-                type="button"
-                className="tab-container-button"
-                onClick={() => this.showModal(true)}
-              >
-                Add
-              </button>
-              {!_.isEmpty(individuals) && (
-                <button
-                  type="button"
-                  className="tab-container-button"
-                  onClick={() => this.showModal(false)}
-                  disabled={!selectedIndividualId}
-                >
-                  Edit
-                </button>
-              )}
-              {!_.isEmpty(individuals) && (
-                <button
-                  type="button"
-                  className="tab-container-button"
-                  onClick={this.onDeleteClick}
-                  disabled={!selectedIndividualId}
-                >
-                  Delete
-                </button>
-              )}
-            </div>
-          </div>
-          <div className={styles.fieldsetContainer}>
-            <fieldset>
-              <legend>Altercation</legend>
-              <input
-                type="checkbox"
-                name="chkFelony"
-                checked={chkFelony}
-                onChange={this.handleInputChange}
+      <Cotainer column>
+        <Row>
+          <Col w={60}>
+            <RoundedSection>
+              <Individuals
+                individuals={individuals || []}
+                callerTypesValues={callerTypesValues}
+                selectedIndividualId={selectedIndividualId}
+                handleChangeSelectedIndividual={
+                  this.handleChangeSelectedIndividual
+                }
+                onAddIndividual={this.onAddIndividual}
+                handleCloseModal={this.handleCloseModal}
+                onDeleteClick={this.onDeleteClick}
               />
-              Felony
-              <br />
-              <br />
-              <input
-                type="checkbox"
-                checked={chkMisdemeanor}
-                name="chkMisdemeanor"
-                onChange={this.handleInputChange}
-              />
-              Misdemeanor
-              <br />
-              <br />
-              <input
-                type="checkbox"
-                checked={chkCivil}
-                name="chkCivil"
-                onChange={this.handleInputChange}
-              />
-              Civil
-              <br />
-              <br />
-              <input
-                type="checkbox"
-                checked={chkOther}
-                name="chkOther"
-                onChange={this.handleInputChange}
-              />
-              Other
-            </fieldset>
-            <fieldset>
-              <legend>Executor</legend>
-              <input
-                type="checkbox"
-                checked={chkSecurity}
-                name="chkSecurity"
-                onChange={this.handleInputChange}
-              />
-              Security Company
-              <br />
-              <br />
-              <input
-                type="checkbox"
-                checked={chkCitizen}
-                name="chkCitizen"
-                onChange={this.handleInputChange}
-              />
-              Citizen's Arrest
-              <br />
-              <br />
-              <input
-                type="checkbox"
-                checked={chkProperty}
-                name="chkProperty"
-                onChange={this.handleInputChange}
-              />
-              Property Manager
-              <br />
-              <br />
-              <input
-                type="checkbox"
-                checked={chkLaw}
-                name="chkLaw"
-                onChange={this.handleInputChange}
-              />
-              Law Enforcement
-            </fieldset>
-            <fieldset>
-              <legend>Options</legend>
-              <div className={styles.optionsDiv}>
-                <label>Warrant #:</label>
-                <input
-                  type="text"
-                  className="greenText"
-                  value={warrant}
-                  name="warrant"
-                  onChange={this.handleInputChange}
+            </RoundedSection>
+            <Row m p>
+              <Col w={30}>
+                <Fieldset legend="Altercation">
+                  <HorizontalInput
+                    type="checkbox"
+                    name="chkFelony"
+                    label="Felony"
+                    value={chkFelony}
+                    onChange={this.handleInputChange}
+                  />
+                  <HorizontalInput
+                    type="checkbox"
+                    name="chkMisdemeanor"
+                    label="Misdemeanor"
+                    value={chkMisdemeanor}
+                    onChange={this.handleInputChange}
+                  />
+                  <HorizontalInput
+                    type="checkbox"
+                    name="chkCivil"
+                    label="Civil"
+                    value={chkCivil}
+                    onChange={this.handleInputChange}
+                  />
+                  <HorizontalInput
+                    type="checkbox"
+                    name="chkOther"
+                    label="Other"
+                    value={chkOther}
+                    onChange={this.handleInputChange}
+                  />
+                </Fieldset>
+              </Col>
+              <Col w={30}>
+                <Fieldset legend="Executor">
+                  <HorizontalInput
+                    type="checkbox"
+                    name="chkSecurity"
+                    label="Security Company"
+                    value={chkSecurity}
+                    onChange={this.handleInputChange}
+                  />
+                  <HorizontalInput
+                    type="checkbox"
+                    name="chkCitizen"
+                    label="Citizen's Arrest"
+                    value={chkCitizen}
+                    onChange={this.handleInputChange}
+                  />
+                  <HorizontalInput
+                    type="checkbox"
+                    name="chkProperty"
+                    label="Property Manager"
+                    value={chkProperty}
+                    onChange={this.handleInputChange}
+                  />
+                  <HorizontalInput
+                    type="checkbox"
+                    name="chkLaw"
+                    label="Law Enforcement"
+                    value={chkLaw}
+                    onChange={this.handleInputChange}
+                  />
+                </Fieldset>
+              </Col>
+              <Col w={40}>
+                <Fieldset legend="Options">
+                  <HorizontalInput
+                    type="text"
+                    name="warrant"
+                    label="Warrant #:"
+                    value={warrant}
+                    onChange={this.handleInputChange}
+                  />
+                  <br />
+                  <HorizontalInput
+                    type="text"
+                    name="court"
+                    label="Court:"
+                    value={court}
+                    onChange={this.handleInputChange}
+                  />
+                  <br />
+                  <HorizontalInput
+                    type="text"
+                    name="agency"
+                    label="Rec Agency:"
+                    value={agency}
+                    onChange={this.handleInputChange}
+                  />
+                  <br />
+                  <HorizontalInput
+                    type="text"
+                    name="casenumber"
+                    label="Case #:"
+                    value={casenumber}
+                    onChange={this.handleInputChange}
+                  />
+                </Fieldset>
+              </Col>
+            </Row>
+            <Row m p>
+              <Col w={100}>
+                <Fieldset legend="Notes">
+                  <Input
+                    type="textarea"
+                    value={notes}
+                    name="notes"
+                    label=""
+                    onChange={this.handleInputChange}
+                  />
+                </Fieldset>
+              </Col>
+            </Row>
+          </Col>
+          <Col w={40} m>
+            <Row>
+              <Col w={100}>
+                <Attachments
+                  attachments={attachments}
+                  onAddAttachment={this.onAddAttachment}
+                  onRemoveAttachment={this.onRemoveAttachment}
                 />
-              </div>
-              <br />
-              <div className={styles.optionsDiv}>
-                <label>Court:</label>
-                <input
-                  type="text"
-                  className="greenText"
-                  value={court}
-                  name="court"
-                  onChange={this.handleInputChange}
-                />
-              </div>
-              <br />
-              <div className={styles.optionsDiv}>
-                <label>Rec Agency:</label>
-                <input
-                  type="text"
-                  className="greenText"
-                  value={agency}
-                  name="agency"
-                  onChange={this.handleInputChange}
-                />
-              </div>
-              <br />
-              <div className={styles.optionsDiv}>
-                <label>Case #:</label>
-                <input
-                  type="text"
-                  className="greenText"
-                  value={casenumber}
-                  name="casenumber"
-                  onChange={this.handleInputChange}
-                />
-              </div>
-            </fieldset>
-          </div>
-          <fieldset className={styles.notesContainer}>
-            <legend>Notes</legend>
-            <textarea
-              className={styles.notesTextArea}
-              value={notes}
-              name="notes"
-              onChange={this.handleInputChange}
-              rows="5"
+              </Col>
+            </Row>
+            <Row m p>
+              <Col>
+                <Fieldset legend="Criminal Organization Information">
+                  <HorizontalInput
+                    name="gang"
+                    value={gang}
+                    label="Gang Affiliation:"
+                    onChange={this.handleInputChange}
+                  />
+                  <br />
+                  <HorizontalInput
+                    name="alias"
+                    value={alias}
+                    label="Alias:"
+                    onChange={this.handleInputChange}
+                  />
+                </Fieldset>
+              </Col>
+            </Row>
+            <Row m p>
+              <Col w={100}>
+                <Fieldset legend="Account">
+                  <AccountSelector
+                    selectedAccount={selectedAccount}
+                    onSelectAccount={this.onSelectAccount}
+                  />
+                </Fieldset>
+              </Col>
+            </Row>
+            <TabButtonContainer
+              onSave={this.onSaveClick}
+              onCancel={this.onCloseTab}
+              onClear={this.onClearClick}
             />
-          </fieldset>
-        </div>
-        <div className={styles.right}>
-          <fieldset>
-            <legend>Criminal Organization Information</legend>
-            <div className={styles.optionsDiv}>
-              <label>Gang Affiliation:</label>
-              <input
-                type="text"
-                className="greenText"
-                value={gang}
-                name="gang"
-                onChange={this.handleInputChange}
-              />
-            </div>
-            <br />
-            <div className={styles.optionsDiv}>
-              <label>Alias:</label>
-              <input
-                type="text"
-                className="greenText"
-                value={alias}
-                name="alias"
-                onChange={this.handleInputChange}
-              />
-            </div>
-          </fieldset>
-          <br />
-          <fieldset>
-            <legend>Account</legend>
-            <Select
-              options={selectValues}
-              value={selectedAccount}
-              onChange={this.onSelectAccount}
-            />
-          </fieldset>
-          <div className={styles.buttonContainer}>
-            <button
-              type="button"
-              className="tab-container-button"
-              onClick={this.onCloseTab}
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              className="tab-container-button"
-              onClick={this.onClearClick}
-            >
-              Clear
-            </button>
-            <button
-              type="button"
-              className="tab-container-button"
-              onClick={this.onSaveClick}
-            >
-              Save
-            </button>
-          </div>
-        </div>
-        <Modal show={isModalVisible} onClose={this.handleCloseModal}>
-          <Individual
-            onClose={(individual: Object) => this.handleCloseModal(individual)}
-            callerTypesValues={callerTypesValues}
-            individual={selectedIndividual}
-          />
-        </Modal>
-      </div>
+          </Col>
+        </Row>
+        <Alert
+          onClose={() =>
+            this.setState({
+              isAlertVisible: false
+            })
+          }
+          show={isAlertVisible}
+          message={message}
+        />
+        <Confirm
+          onOK={this.onConfirmClick}
+          onCancel={() =>
+            this.setState({
+              isConfirmVisible: false
+            })
+          }
+          show={isConfirmVisible}
+          message={message}
+        />
+      </Cotainer>
     );
   }
 }

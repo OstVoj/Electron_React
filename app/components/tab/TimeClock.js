@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 // @flow
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -18,7 +19,8 @@ type Props = {
   loginStore: Object,
   getLastTimeClockEntry: Function,
   uploadTimeClock: Function,
-  timeClockStore: Object
+  timeClockStore: Object,
+  gpsStore: Object
 };
 
 type States = {
@@ -75,9 +77,7 @@ class TimeClock extends Component<Props, States> {
 
   getLastTimeClockEntry() {
     const { loginStore, getLastTimeClockEntry } = this.props;
-    const { userId, password, companyId } = loginStore.auth;
-    const { setting } = loginStore;
-    getLastTimeClockEntry(setting.httpHost, userId, password, companyId);
+    getLastTimeClockEntry();
   }
 
   startTime = () => {
@@ -138,8 +138,8 @@ class TimeClock extends Component<Props, States> {
           window.stream = stream;
           this.video.srcObject = stream;
           this.video.onloadedmetadata = e => this.video.play();
-          const video = this.video;
-          const canvas = this.canvas;
+          const { video } = this;
+          const { canvas } = this;
           let streaming = false;
           video.addEventListener(
             'canplay',
@@ -173,21 +173,11 @@ class TimeClock extends Component<Props, States> {
       if (err) {
         console.log(err);
       } else {
-        const { loginStore } = this.props;
+        const { loginStore, gpsStore } = this.props;
         const { userId, password, companyId } = loginStore.auth;
-        const latLon = utility.getCurrentLatLon();
         const { uploadTimeClock } = this.props;
         const { setting } = loginStore;
-        uploadTimeClock(
-          setting.httpHost,
-          userId,
-          password,
-          companyId,
-          latLon.lat,
-          latLon.lon,
-          imagePath,
-          io
-        );
+        uploadTimeClock(gpsStore.lat, gpsStore.lon, imagePath, io);
       }
     });
   };
@@ -219,7 +209,11 @@ class TimeClock extends Component<Props, States> {
     return (
       <div className={styles.container} data-tid="container">
         <div className={styles.left}>
-          <div className={`rounded-description-container ${styles.overviewContainer}`}>
+          <div
+            className={`rounded-description-container ${
+              styles.overviewContainer
+            }`}
+          >
             {selectedCamera && (
               <div className={styles.overViewDetail}>
                 <div>Date / Time: {dateTime}</div>
@@ -271,7 +265,11 @@ class TimeClock extends Component<Props, States> {
           </div>
         </div>
         <div className={styles.right}>
-          <div className={`rounded-description-container ${styles.timeClockDescription}`}>
+          <div
+            className={`rounded-description-container ${
+              styles.timeClockDescription
+            }`}
+          >
             Please make sure to center your image the middle of the box shown
             below and that you are in an area that has sufficient light
           </div>
@@ -302,6 +300,7 @@ function mapStateToProps(state: PropTypes.object) {
   return {
     loginStore: state.login,
     timeClockStore: state.timeClock,
+    gpsStore: state.gps,
     ...this.props
   };
 }

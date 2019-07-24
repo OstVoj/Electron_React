@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+}
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.activeRow {
+  color: black;
+  background-color: white;
+}

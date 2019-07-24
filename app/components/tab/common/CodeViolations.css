@@ -1,0 +1,21 @@
+.inputInline {
+  width: 100%;
+  padding-top: 10px;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0;
+  display: flex;
+  justify-content: space-around;
+}
+.modalInputInline {
+  width: 100%;
+  padding-top: 50px;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 0;
+}
+.modalInputInline div {
+  display: inline-block;
+  vertical-align: top;
+  width: 33%;
+}

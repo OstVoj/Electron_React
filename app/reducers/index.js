@@ -1,17 +1,19 @@
 // @flow
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
-import counter from './counter';
 import login from './login';
 import timeClock from './timeClock';
 import tab from './tab';
+import gps from './gps';
+import chat from './chat';
 
 export default function createRootReducer(history: History) {
   return combineReducers({
     router: connectRouter(history),
-    counter,
     login,
     timeClock,
-    tab
+    tab,
+    gps,
+    chat
   });
 }

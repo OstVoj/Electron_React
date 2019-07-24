@@ -6,27 +6,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as LoginActions from '../actions/login';
 import routes from '../constants/routes';
+import logger from '../utils/logger';
 
 type Props = {
   children: React.Node,
   loginStore: PropTypes.object,
-  ping: (
-    httpHost: string,
-    userId: string,
-    password: string,
-    companyId: string,
-    machineId: string
-  ) => void,
-  getLoader: (
-    httpHost: string,
-    userId: string,
-    password: string,
-    companyId: string
-  ) => void
+  getLoader: () => void
 };
 
 export class App extends React.Component<Props> {
   props: Props;
+
+  componentDidMount() {
+    logger.log('Starting Application');
+  }
 
   componentDidUpdate(prevProps: PropTypes.object) {
     const { loginStore } = this.props;
@@ -34,16 +27,8 @@ export class App extends React.Component<Props> {
       if (loginStore.auth) {
         const { success } = loginStore.auth;
         if (success === '1') {
-          const { ping, getLoader } = this.props;
-          const { userId, password, companyId, machineId } = loginStore.auth;
-          const { setting } = loginStore;
-          const interval = Number(process.env.INTERVAL) * 1000;
-          setInterval(
-            () =>
-              ping(setting.httpHost, userId, password, companyId, machineId),
-            interval
-          );
-          getLoader(setting.httpHost, userId, password, companyId);
+          const { getLoader } = this.props;
+          getLoader();
         }
       }
     }
@@ -70,6 +55,7 @@ export class App extends React.Component<Props> {
 function mapStateToProps(state: PropTypes.object) {
   return {
     loginStore: state.login,
+    gpsStore: state.gps,
     ...this.props
   };
 }

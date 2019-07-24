@@ -1,4 +1,4 @@
-// flow-typed signature: 24a181f475b7388d305eaf828ac7fcdf
+// flow-typed signature: 5e613456a12409ae05b4dbe6d95b2f73
 // flow-typed version: <<STUB>>/eslint-plugin-react_v^7.11.1/flow_v0.77.0
 
 /**
@@ -162,6 +162,10 @@ declare module 'eslint-plugin-react/lib/rules/jsx-props-no-multi-spaces' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-react/lib/rules/jsx-props-no-spreading' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-react/lib/rules/jsx-sort-default-props' {
   declare module.exports: any;
 }
@@ -290,6 +294,10 @@ declare module 'eslint-plugin-react/lib/rules/prefer-es6-class' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-react/lib/rules/prefer-read-only-props' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-react/lib/rules/prefer-stateless-function' {
   declare module.exports: any;
 }
@@ -323,6 +331,14 @@ declare module 'eslint-plugin-react/lib/rules/sort-comp' {
 }
 
 declare module 'eslint-plugin-react/lib/rules/sort-prop-types' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-react/lib/rules/state-in-constructor' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-react/lib/rules/static-property-placement' {
   declare module.exports: any;
 }
 
@@ -363,6 +379,10 @@ declare module 'eslint-plugin-react/lib/util/getTokenBeforeClosingBracket' {
 }
 
 declare module 'eslint-plugin-react/lib/util/jsx' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-react/lib/util/linkComponents' {
   declare module.exports: any;
 }
 
@@ -514,6 +534,9 @@ declare module 'eslint-plugin-react/lib/rules/jsx-pascal-case.js' {
 declare module 'eslint-plugin-react/lib/rules/jsx-props-no-multi-spaces.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-props-no-multi-spaces'>;
 }
+declare module 'eslint-plugin-react/lib/rules/jsx-props-no-spreading.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-props-no-spreading'>;
+}
 declare module 'eslint-plugin-react/lib/rules/jsx-sort-default-props.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/jsx-sort-default-props'>;
 }
@@ -610,6 +633,9 @@ declare module 'eslint-plugin-react/lib/rules/no-will-update-set-state.js' {
 declare module 'eslint-plugin-react/lib/rules/prefer-es6-class.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/prefer-es6-class'>;
 }
+declare module 'eslint-plugin-react/lib/rules/prefer-read-only-props.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/prefer-read-only-props'>;
+}
 declare module 'eslint-plugin-react/lib/rules/prefer-stateless-function.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/prefer-stateless-function'>;
 }
@@ -636,6 +662,12 @@ declare module 'eslint-plugin-react/lib/rules/sort-comp.js' {
 }
 declare module 'eslint-plugin-react/lib/rules/sort-prop-types.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/sort-prop-types'>;
+}
+declare module 'eslint-plugin-react/lib/rules/state-in-constructor.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/state-in-constructor'>;
+}
+declare module 'eslint-plugin-react/lib/rules/static-property-placement.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/rules/static-property-placement'>;
 }
 declare module 'eslint-plugin-react/lib/rules/style-prop-object.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/rules/style-prop-object'>;
@@ -666,6 +698,9 @@ declare module 'eslint-plugin-react/lib/util/getTokenBeforeClosingBracket.js' {
 }
 declare module 'eslint-plugin-react/lib/util/jsx.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/util/jsx'>;
+}
+declare module 'eslint-plugin-react/lib/util/linkComponents.js' {
+  declare module.exports: $Exports<'eslint-plugin-react/lib/util/linkComponents'>;
 }
 declare module 'eslint-plugin-react/lib/util/log.js' {
   declare module.exports: $Exports<'eslint-plugin-react/lib/util/log'>;

@@ -19,6 +19,10 @@ import model from './service/model';
 const fs = require('file-system');
 const path = require('path');
 
+app.on('window-all-closed', () => {
+  app.quit();
+});
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -81,7 +85,9 @@ app.on('ready', async () => {
   });
 
   const homePath = `${app.getPath('home')}/adam602`;
-  fs.mkdir(homePath);
+  fs.mkdirSync(homePath);
+  fs.mkdirSync(`${homePath}/logs`);
+
   model.initDb(homePath, mainWindow.loadURL(`file://${__dirname}/app.html`));
 
   // @TODO: Use 'ready-to-show' event
@@ -101,11 +107,12 @@ app.on('ready', async () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+  mainWindow.setMenu(null);
 
   // mainWindow.webContents.openDevTools();
 
-  // const menuBuilder = new MenuBuilder(mainWindow);
-  // menuBuilder.buildMenu();
+  const menuBuilder = new MenuBuilder(mainWindow);
+  menuBuilder.buildMenu();
 
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line

@@ -1,6 +1,7 @@
 // @flow
 import type { Dispatch } from '../reducers/types';
 import api from '../service/api';
+import logger from '../utils/logger';
 
 export const SET_LOADING = 'SET_LOADING';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -10,6 +11,9 @@ export const GET_SETTING_FAILED = 'GET_SETTING_FAILED';
 export const PING_REQUESTED = 'PING_REQUESTED';
 export const GET_LOADER_SUCCESS = 'GET_LOADER_SUCCESS';
 export const GET_LOADER_FAILED = 'GET_LOADER_FAILED';
+export const SET_GPS = 'SET_GPS';
+export const SET_STATUS = 'SET_STATUS';
+export const SET_ONLINE_STATUS = 'SET_ONLINE_STATUS';
 
 export function setLoading(loading: boolean) {
   return {
@@ -99,42 +103,97 @@ export function login(
   };
 }
 
-export function ping(
-  httpHost: string,
-  userId: string,
-  password: string,
-  companyId: string,
-  machineId: string
-) {
-  api
-    .ping(httpHost, userId, password, companyId, machineId)
-    .then(res => res.json())
-    // eslint-disable-next-line promise/always-return
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  return {
-    type: PING_REQUESTED
+export function ping(machineId: string) {
+  return (dispatch: Dispatch) => {
+    let responseStatus = 0;
+    api
+      .ping(machineId)
+      .then(res => {
+        responseStatus = res.status;
+        return res.json();
+      })
+      .then(data => {
+        if (responseStatus === 401 && data.tokenExpired) {
+          dispatch(setOnlineStatus('NO'));
+          return dispatch(setStatus(responseStatus));
+        }
+        if (responseStatus !== 200) {
+          logger.log(
+            'Unable to connect to insert ping. Setting isConnected to NO'
+          );
+          return dispatch(setOnlineStatus('NO'));
+        }
+        if (responseStatus === 200 && data.success !== '1') {
+          logger.log(
+            `Ping success is ${data.success}. Setting isConnected to NO`
+          );
+          return dispatch(setOnlineStatus('NO'));
+        }
+        return dispatch(setOnlineStatus('YES'));
+      })
+      .catch(err => {
+        console.log(err);
+        logger.log(
+          'Unable to connect to insert ping. Setting isConnected to NO'
+        );
+        return dispatch(setOnlineStatus('NO'));
+      });
   };
 }
 
-export function getLoader(
-  httpHost: string,
-  userId: string,
-  password: string,
-  companyId: string
-) {
+export function getLoader() {
   return (dispatch: Dispatch) => {
     api
-      .getLoader(httpHost, userId, password, companyId)
+      .getLoader()
       .then(res => res.json())
       .then(data => dispatch(setLoaderSuccess(data)))
       .catch(err => {
         console.log(err);
         return dispatch(setLoaderFailed());
       });
+  };
+}
+
+export function setGps(lat: number, lon: number) {
+  const gps = {
+    lat,
+    lon
+  };
+  return {
+    type: SET_GPS,
+    gps
+  };
+}
+
+export function setStatus(status: any) {
+  return {
+    type: SET_STATUS,
+    status
+  };
+}
+
+export function setOnlineStatus(onlineStatus: any) {
+  return {
+    type: SET_ONLINE_STATUS,
+    onlineStatus
+  };
+}
+
+export function changeStatus(status: string, lat: string, lon: string) {
+  return (dispatch: Dispatch) => {
+    let responseStatus = 0;
+    api
+      .setStatus(status, lat, lon)
+      .then(res => {
+        responseStatus = res.status;
+        return res.json();
+      })
+      .then(data => {
+        if (responseStatus === 401 && data.tokenExpired) {
+          return dispatch(setStatus(401));
+        }
+        return dispatch(setStatus(status));
+      })
+      .catch(err => dispatch(setStatus(false)));
   };
 }

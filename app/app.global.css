@@ -2,14 +2,13 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
-@import '~@fortawesome/fontawesome-free/css/all.css';
-
 body {
   position: relative;
   color: white;
   height: 100vh;
   background-color: #000000;
   font-family: Arial, Helvetica, Helvetica Neue, serif;
+  font-size: 13px;
   padding: 0;
   margin: 0;
 }
@@ -48,8 +47,8 @@ a:hover {
 }
 
 @font-face {
-  font-family: "Digital";
-  src: url("../resources/digital-7/digital-7.ttf");
+  font-family: 'Digital';
+  src: url('../resources/digital-7/digital-7.ttf');
 }
 
 .tab-panel button:first-child {
@@ -92,16 +91,18 @@ button.tab.active {
 }
 
 .pynge button.tab .closeTab:hover {
-  opacity: .1;
+  opacity: 0.1;
 }
 
-.pynge button.tab .closeTab:after, .pynge button.tab .closeTab:before {
+.pynge button.tab .closeTab:after,
+.pynge button.tab .closeTab:before {
   background: #9ca1a7;
   height: 2px;
 }
 
 button.tab-container-button {
-  width: 100px;
+  min-width: 100px;
+  width: auto;
   height: 20px;
   border: 1px solid white;
   border-radius: 3px;
@@ -129,7 +130,8 @@ table {
   font-size: 0.8em;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
@@ -153,5 +155,58 @@ input.greenText {
   color: green;
   border-color: white;
   background-color: transparent;
-  font-size: 1em;
+  font-family: sans-serif;
+  font-size: 15px;
+}
+
+input.dateField {
+  color: green;
+  border-color: white;
+  background-color: transparent;
+  font-family: sans-serif;
+  font-size: 15px;
+}
+
+input[type='date'] {
+  font-family: sans-serif;
+}
+
+.white-space-pre {
+  white-space: pre-wrap;
+}
+
+.backdrop {
+  z-index: 9999;
+}
+
+.tabContainerButton {
+  min-width: 100px;
+  width: auto;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 3px;
+  color: green;
+  background-color: transparent;
+}
+
+.status-area table {
+  border: 0;
+}
+
+.status-area td {
+  text-transform: uppercase;
+  color: green;
+  border: 0;
+  font-family: 'Digital';
+  font-size: 18px;
+}
+
+.green-button {
+  min-width: 100px;
+  width: auto;
+  height: 20px;
+  border: 1px solid white;
+  border-radius: 3px;
+  color: green;
+  background-color: transparent;
 }

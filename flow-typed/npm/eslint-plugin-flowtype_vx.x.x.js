@@ -1,4 +1,4 @@
-// flow-typed signature: 25da889eddd3f85781c922a2eefc9869
+// flow-typed signature: 2306603ae582ca882d5f46f256faa016
 // flow-typed version: <<STUB>>/eslint-plugin-flowtype_v^3.2.0/flow_v0.77.0
 
 /**
@@ -94,6 +94,10 @@ declare module 'eslint-plugin-flowtype/dist/rules/noFlowFixMeComments' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-flowtype/dist/rules/noMixed' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-flowtype/dist/rules/noMutableArray' {
   declare module.exports: any;
 }
@@ -163,6 +167,10 @@ declare module 'eslint-plugin-flowtype/dist/rules/spaceBeforeGenericBracket' {
 }
 
 declare module 'eslint-plugin-flowtype/dist/rules/spaceBeforeTypeColon' {
+  declare module.exports: any;
+}
+
+declare module 'eslint-plugin-flowtype/dist/rules/spreadExactType' {
   declare module.exports: any;
 }
 
@@ -321,6 +329,9 @@ declare module 'eslint-plugin-flowtype/dist/rules/noExistentialType.js' {
 declare module 'eslint-plugin-flowtype/dist/rules/noFlowFixMeComments.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/noFlowFixMeComments'>;
 }
+declare module 'eslint-plugin-flowtype/dist/rules/noMixed.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/noMixed'>;
+}
 declare module 'eslint-plugin-flowtype/dist/rules/noMutableArray.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/noMutableArray'>;
 }
@@ -374,6 +385,9 @@ declare module 'eslint-plugin-flowtype/dist/rules/spaceBeforeGenericBracket.js' 
 }
 declare module 'eslint-plugin-flowtype/dist/rules/spaceBeforeTypeColon.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/spaceBeforeTypeColon'>;
+}
+declare module 'eslint-plugin-flowtype/dist/rules/spreadExactType.js' {
+  declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/spreadExactType'>;
 }
 declare module 'eslint-plugin-flowtype/dist/rules/typeColonSpacing/evaluateFunctions.js' {
   declare module.exports: $Exports<'eslint-plugin-flowtype/dist/rules/typeColonSpacing/evaluateFunctions'>;

@@ -1,4 +1,4 @@
-// flow-typed signature: e5c47026f88fc91efc7f1fffc6dac7ae
+// flow-typed signature: 5846abdfb56bfcede1eb649687abc1bb
 // flow-typed version: <<STUB>>/eslint-plugin-import_v^2.14.0/flow_v0.77.0
 
 /**
@@ -218,6 +218,10 @@ declare module 'eslint-plugin-import/lib/rules/no-unresolved' {
   declare module.exports: any;
 }
 
+declare module 'eslint-plugin-import/lib/rules/no-unused-modules' {
+  declare module.exports: any;
+}
+
 declare module 'eslint-plugin-import/lib/rules/no-useless-path-segments' {
   declare module.exports: any;
 }
@@ -389,6 +393,9 @@ declare module 'eslint-plugin-import/lib/rules/no-unassigned-import.js' {
 }
 declare module 'eslint-plugin-import/lib/rules/no-unresolved.js' {
   declare module.exports: $Exports<'eslint-plugin-import/lib/rules/no-unresolved'>;
+}
+declare module 'eslint-plugin-import/lib/rules/no-unused-modules.js' {
+  declare module.exports: $Exports<'eslint-plugin-import/lib/rules/no-unused-modules'>;
 }
 declare module 'eslint-plugin-import/lib/rules/no-useless-path-segments.js' {
   declare module.exports: $Exports<'eslint-plugin-import/lib/rules/no-useless-path-segments'>;

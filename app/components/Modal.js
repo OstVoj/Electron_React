@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 class Modal extends React.Component {
   render() {
-    const { show, children } = this.props;
+    const { show, children, width, topOffset } = this.props;
     if (!show) {
       return null;
     }
+
+    const padding = width ? `${(100 - width) / 2}%` : 50;
     // The gray background
     const backdropStyle = {
       position: 'fixed',
@@ -14,8 +16,10 @@ class Modal extends React.Component {
       bottom: 0,
       left: 0,
       right: 0,
-      backgroundColor: 'rgba(0,0,0,0.3)',
-      padding: 50
+      backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      paddingTop: topOffset,
+      paddingLeft: padding,
+      paddingRight: padding
     };
 
     // The modal "window"
@@ -25,7 +29,7 @@ class Modal extends React.Component {
       borderRadius: 5,
       width: 'auto',
       height: 'auto',
-      margin: '0 auto',
+      margin: '50px auto',
       padding: 30
     };
 
@@ -42,7 +46,13 @@ class Modal extends React.Component {
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
+  width: PropTypes.number,
+  topOffset: PropTypes.number
+};
+
+Modal.defaultValues = {
+  topOffset: 50
 };
 
 export default Modal;

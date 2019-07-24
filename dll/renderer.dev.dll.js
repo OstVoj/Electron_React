@@ -99,15 +99,99 @@ eval("module.exports = __webpack_require__;\n\n//# sourceURL=webpack://renderer/
 
 /***/ }),
 
-/***/ "@fortawesome/fontawesome-free":
-/*!************************************************!*\
-  !*** external "@fortawesome/fontawesome-free" ***!
-  \************************************************/
+/***/ "@fortawesome/fontawesome":
+/*!*******************************************!*\
+  !*** external "@fortawesome/fontawesome" ***!
+  \*******************************************/
 /*! no static exports found */
 /*! all exports used */
 /***/ (function(module, exports) {
 
-eval("module.exports = @fortawesome/fontawesome-free;\n\n//# sourceURL=webpack://renderer/external_%22@fortawesome/fontawesome-free%22?");
+eval("module.exports = @fortawesome/fontawesome;\n\n//# sourceURL=webpack://renderer/external_%22@fortawesome/fontawesome%22?");
+
+/***/ }),
+
+/***/ "@fortawesome/fontawesome-free-solid":
+/*!******************************************************!*\
+  !*** external "@fortawesome/fontawesome-free-solid" ***!
+  \******************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = @fortawesome/fontawesome-free-solid;\n\n//# sourceURL=webpack://renderer/external_%22@fortawesome/fontawesome-free-solid%22?");
+
+/***/ }),
+
+/***/ "@fortawesome/fontawesome-svg-core":
+/*!****************************************************!*\
+  !*** external "@fortawesome/fontawesome-svg-core" ***!
+  \****************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = @fortawesome/fontawesome-svg-core;\n\n//# sourceURL=webpack://renderer/external_%22@fortawesome/fontawesome-svg-core%22?");
+
+/***/ }),
+
+/***/ "@fortawesome/free-brands-svg-icons":
+/*!*****************************************************!*\
+  !*** external "@fortawesome/free-brands-svg-icons" ***!
+  \*****************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = @fortawesome/free-brands-svg-icons;\n\n//# sourceURL=webpack://renderer/external_%22@fortawesome/free-brands-svg-icons%22?");
+
+/***/ }),
+
+/***/ "@fortawesome/free-regular-svg-icons":
+/*!******************************************************!*\
+  !*** external "@fortawesome/free-regular-svg-icons" ***!
+  \******************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = @fortawesome/free-regular-svg-icons;\n\n//# sourceURL=webpack://renderer/external_%22@fortawesome/free-regular-svg-icons%22?");
+
+/***/ }),
+
+/***/ "@fortawesome/free-solid-svg-icons":
+/*!****************************************************!*\
+  !*** external "@fortawesome/free-solid-svg-icons" ***!
+  \****************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = @fortawesome/free-solid-svg-icons;\n\n//# sourceURL=webpack://renderer/external_%22@fortawesome/free-solid-svg-icons%22?");
+
+/***/ }),
+
+/***/ "@fortawesome/react-fontawesome":
+/*!*************************************************!*\
+  !*** external "@fortawesome/react-fontawesome" ***!
+  \*************************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = @fortawesome/react-fontawesome;\n\n//# sourceURL=webpack://renderer/external_%22@fortawesome/react-fontawesome%22?");
+
+/***/ }),
+
+/***/ "classnames":
+/*!*****************************!*\
+  !*** external "classnames" ***!
+  \*****************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = classnames;\n\n//# sourceURL=webpack://renderer/external_%22classnames%22?");
 
 /***/ }),
 
@@ -120,6 +204,18 @@ eval("module.exports = @fortawesome/fontawesome-free;\n\n//# sourceURL=webpack:/
 /***/ (function(module, exports) {
 
 eval("module.exports = connected-react-router;\n\n//# sourceURL=webpack://renderer/external_%22connected-react-router%22?");
+
+/***/ }),
+
+/***/ "create-react-class":
+/*!*************************************!*\
+  !*** external "create-react-class" ***!
+  \*************************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = create-react-class;\n\n//# sourceURL=webpack://renderer/external_%22create-react-class%22?");
 
 /***/ }),
 
@@ -207,6 +303,18 @@ eval("module.exports = email-validator;\n\n//# sourceURL=webpack://renderer/exte
 
 /***/ }),
 
+/***/ "fetch-defaults":
+/*!*********************************!*\
+  !*** external "fetch-defaults" ***!
+  \*********************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = fetch-defaults;\n\n//# sourceURL=webpack://renderer/external_%22fetch-defaults%22?");
+
+/***/ }),
+
 /***/ "file-system":
 /*!******************************!*\
   !*** external "file-system" ***!
@@ -255,6 +363,18 @@ eval("module.exports = fs;\n\n//# sourceURL=webpack://renderer/external_%22fs%22
 
 /***/ }),
 
+/***/ "gps":
+/*!**********************!*\
+  !*** external "gps" ***!
+  \**********************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = gps;\n\n//# sourceURL=webpack://renderer/external_%22gps%22?");
+
+/***/ }),
+
 /***/ "history":
 /*!**************************!*\
   !*** external "history" ***!
@@ -267,15 +387,63 @@ eval("module.exports = history;\n\n//# sourceURL=webpack://renderer/external_%22
 
 /***/ }),
 
-/***/ "lodash":
+/***/ "lodash.clonedeep":
+/*!***********************************!*\
+  !*** external "lodash.clonedeep" ***!
+  \***********************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = lodash.clonedeep;\n\n//# sourceURL=webpack://renderer/external_%22lodash.clonedeep%22?");
+
+/***/ }),
+
+/***/ "lodash.findindex":
+/*!***********************************!*\
+  !*** external "lodash.findindex" ***!
+  \***********************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = lodash.findindex;\n\n//# sourceURL=webpack://renderer/external_%22lodash.findindex%22?");
+
+/***/ }),
+
+/***/ "lodash.get":
+/*!*****************************!*\
+  !*** external "lodash.get" ***!
+  \*****************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = lodash.get;\n\n//# sourceURL=webpack://renderer/external_%22lodash.get%22?");
+
+/***/ }),
+
+/***/ "lodash.isempty":
+/*!*********************************!*\
+  !*** external "lodash.isempty" ***!
+  \*********************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = lodash.isempty;\n\n//# sourceURL=webpack://renderer/external_%22lodash.isempty%22?");
+
+/***/ }),
+
+/***/ "moment":
 /*!*************************!*\
-  !*** external "lodash" ***!
+  !*** external "moment" ***!
   \*************************/
 /*! no static exports found */
 /*! all exports used */
 /***/ (function(module, exports) {
 
-eval("module.exports = lodash;\n\n//# sourceURL=webpack://renderer/external_%22lodash%22?");
+eval("module.exports = moment;\n\n//# sourceURL=webpack://renderer/external_%22moment%22?");
 
 /***/ }),
 
@@ -348,6 +516,18 @@ eval("module.exports = react-dom;\n\n//# sourceURL=webpack://renderer/external_%
 /***/ (function(module, exports) {
 
 eval("module.exports = react-hot-loader;\n\n//# sourceURL=webpack://renderer/external_%22react-hot-loader%22?");
+
+/***/ }),
+
+/***/ "react-keydown":
+/*!********************************!*\
+  !*** external "react-keydown" ***!
+  \********************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = react-keydown;\n\n//# sourceURL=webpack://renderer/external_%22react-keydown%22?");
 
 /***/ }),
 
@@ -432,6 +612,30 @@ eval("module.exports = redux;\n\n//# sourceURL=webpack://renderer/external_%22re
 /***/ (function(module, exports) {
 
 eval("module.exports = redux-thunk;\n\n//# sourceURL=webpack://renderer/external_%22redux-thunk%22?");
+
+/***/ }),
+
+/***/ "serialport":
+/*!*****************************!*\
+  !*** external "serialport" ***!
+  \*****************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = serialport;\n\n//# sourceURL=webpack://renderer/external_%22serialport%22?");
+
+/***/ }),
+
+/***/ "socket.io-client":
+/*!***********************************!*\
+  !*** external "socket.io-client" ***!
+  \***********************************/
+/*! no static exports found */
+/*! all exports used */
+/***/ (function(module, exports) {
+
+eval("module.exports = socket.io-client;\n\n//# sourceURL=webpack://renderer/external_%22socket.io-client%22?");
 
 /***/ }),
 

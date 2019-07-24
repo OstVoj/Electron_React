@@ -1,4 +1,4 @@
-// flow-typed signature: 797f69016541eb1efef3d3fe1bd40a94
+// flow-typed signature: 0657b2280f908c9bccf3ee4503440883
 // flow-typed version: <<STUB>>/sinon_v^7.2.2/flow_v0.77.0
 
 /**
@@ -99,10 +99,6 @@ declare module 'sinon/lib/sinon/throw-on-falsy-object' {
 }
 
 declare module 'sinon/lib/sinon/util/core/default-config' {
-  declare module.exports: any;
-}
-
-declare module 'sinon/lib/sinon/util/core/deprecated' {
   declare module.exports: any;
 }
 
@@ -250,9 +246,6 @@ declare module 'sinon/lib/sinon/throw-on-falsy-object.js' {
 }
 declare module 'sinon/lib/sinon/util/core/default-config.js' {
   declare module.exports: $Exports<'sinon/lib/sinon/util/core/default-config'>;
-}
-declare module 'sinon/lib/sinon/util/core/deprecated.js' {
-  declare module.exports: $Exports<'sinon/lib/sinon/util/core/deprecated'>;
 }
 declare module 'sinon/lib/sinon/util/core/export-async-behaviors.js' {
   declare module.exports: $Exports<'sinon/lib/sinon/util/core/export-async-behaviors'>;

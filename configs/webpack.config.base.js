@@ -5,6 +5,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import { dependencies } from '../package.json';
+
 require('dotenv').config({ path: require('find-config')('.env') });
 
 const today = new Date();
@@ -73,6 +74,6 @@ export default {
       DB_NAME: JSON.stringify(process.env.DB_NAME)
     }),
 
-    new webpack.NamedModulesPlugin(),
+    new webpack.NamedModulesPlugin()
   ]
 };

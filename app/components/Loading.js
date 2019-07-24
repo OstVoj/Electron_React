@@ -5,8 +5,8 @@ import { css } from '@emotion/core';
 import styles from './Loading.css';
 
 const override = css`
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 `;
 
 type Props = {
@@ -19,14 +19,16 @@ export default class Loading extends Component<Props> {
   render() {
     const { loading } = this.props;
     return (
-      loading && <div className={styles.container} data-tid="container">
-        <FadeLoader
-          sizeUnit={"px"}
-          size={150}
-          color={'#ffffff'}
-          loading={loading}
-        />
-      </div>
+      loading && (
+        <div className={styles.container} data-tid="container">
+          <FadeLoader
+            sizeUnit="px"
+            size={150}
+            color="#ffffff"
+            loading={loading}
+          />
+        </div>
+      )
     );
   }
 }
