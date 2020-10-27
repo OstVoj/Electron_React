@@ -289,7 +289,7 @@
     "socket.io-client": "^2.2.0",
     "source-map-support": "^0.5.9",
     "sql.js": "^0.4.0",
-    "systeminformation": "^3.54.0"
+    "systeminformation": "^4.27.11"
   },
   "devEngines": {
     "node": ">=7.x",
